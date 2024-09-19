@@ -1,0 +1,32 @@
+ion-content {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0; 
+  --background:none;
+  background-color: #CDE1FF;
+}
+body {
+  margin: 0;
+  height: 100%;
+}
+
+#map {
+  position: absolute;
+  top: -10em;
+  bottom: 0;
+  width: 100%;
+}
+.button-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra verticalmente los botones */
+  margin-top: 20vh;
+}
+
+ion-button {
+  width: 200px; /* Define un ancho fijo */
+  height: 200px; /* Define una altura fija */
+  margin-bottom: 10px; /*Espacio entre los botones*/
+  border-radius: 0 !important; /* Elimina el borde redondeado de Ionic */
+}

@@ -1,0 +1,66 @@
+<div class="app-container">
+  <div class="form-container">
+    <div
+      style="display: flex; align-items: center; justify-content: space-between"
+    >
+      <ion-buttons class="boton_1" slot="start">
+        <ion-back-button defaultHref="/inicio/home"></ion-back-button>
+      </ion-buttons>
+      <h1 class="title_2" style="text-align: center">Perfil</h1>
+      <div></div>
+    </div>
+
+    <ion-item lines="none" class="ion-margin-top custom-item">
+      <ion-input
+        label="Nombre: "
+        #nombreInput
+        type="text"
+        readonly="true"
+        [(ngModel)]="nombre"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item
+      lines="none"
+      button
+      class="ion-margin-top custom-item"
+      routerLink="forgot-password"
+    >
+      <ion-input
+        readonly="true"
+        label="Contraseña: "
+        #contrasenaInput
+        type="password"
+        [(ngModel)]="password"
+      ></ion-input>
+      <ion-button
+        slot="end"
+        fill="clear"
+        class="edit-button"
+        (click)="toggleEdit()"
+      >
+        <ion-icon name="create-outline" color="dark"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item lines="none" class="ion-margin-top custom-item">
+      <ion-input
+        label="Correo Electrónico: "
+        type="email"
+        readonly="true"
+        [(ngModel)]="correo"
+      ></ion-input>
+    </ion-item>
+
+    <ion-footer class="ion-no-border safe-p-bottom">
+      <ion-menu-toggle auto-hide="false">
+        <ion-item (click)="signOut()" lines="none">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          <ion-label>cerrar sesión</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-footer>
+  </div>
+</div>
+<app-tabs style="z-index: 1"></app-tabs>
+

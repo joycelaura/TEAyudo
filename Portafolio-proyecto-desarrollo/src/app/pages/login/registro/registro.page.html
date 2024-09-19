@@ -1,0 +1,135 @@
+<app-header backbutton="/login" ></app-header>
+
+<div class="app-container">
+
+  <div class="form-container">
+    <div class="header-image-container">
+      <img src="" class="header-image"> <!--//aqui poner el loog de mi app-->
+  </div>
+    <div
+      style="display: flex; align-items: center; justify-content: space-between"
+    >
+    
+      
+      <h1 class="Titulo_1" style="text-align: center">  <!--FIXME Sugiero darme un nombre mas descriptivo a esta clase, como titulo o titulo-registro. Por otro lado, evitar utilizar el style argument y en cambio, utilizar la clase creada y darle estilo en el .css-->
+        Unete a TEAyudo
+        <p class="subtittle">¿Quieres crearte una cuenta?</p>
+      </h1>
+      <div></div>
+    </div>
+    
+    <!--===Formulario===-->
+    <form [formGroup]="registerForm">
+      <!--===========Nombre===========-->
+      <label class="my-label">Nombre</label>
+      <ion-input
+        class="input"
+        type="text"
+        formControlName="nombre"
+        required
+      ></ion-input>      
+      <div
+        *ngIf="registerForm.controls['nombre'].touched && registerForm.controls['nombre'].errors?.['required']"
+      >
+        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
+        <ion-text class="notificaciones"> Este campo es obligatorio</ion-text>
+      </div>
+      <!--===========Correo Electronico===========-->
+      <label class="my-label">Correo Electronico</label> <!--FIXME Lo mismo para esta clase, un nombre mas descriptivo que no pueda dar conflicto con el codigo de otros equipso-->
+      <ion-input
+        class="input"
+        type="text"
+        formControlName="correo"
+        placeholder="nombre@gmail.com"
+        required
+      ></ion-input>
+      <div
+        *ngIf="registerForm.controls['correo'].touched && registerForm.controls['correo'].errors?.['required']"
+      >
+        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
+        <ion-text class="notificaciones"> Este campo es obligatorio</ion-text>
+      </div>
+      <div
+        *ngIf="registerForm.controls['correo'].touched && registerForm.controls['correo'].value && !registerForm.controls['correo'].value.includes('@')"
+      >
+        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
+        <ion-text class="notificaciones"> El correo electrónico debe ser válido</ion-text>
+      </div>
+      
+      <!--===========Contraseña===========-->
+      <label class="my-label">Contraseña</label>  <!--FIXME Lo mismo para esta clase, un nombre mas descriptivo que no pueda dar conflicto con el codigo de otros equipso-->
+      <div style="display: flex; align-items: center; position: relative">
+        <ion-input
+          class="input"
+          type="{{ mostrarContrasena ? 'text' : 'password' }}"
+          formControlName="contrasena"
+          required
+        ></ion-input>
+        <ion-button
+          class="mostrar-contrasena"
+          fill="clear"
+          slot="end"
+          (click)="toggleMostrarContrasena()"
+          color="transparent"
+          style="position: absolute; right: 0; z-index: 2"
+        >
+          <ion-icon
+            [name]="mostrarContrasena ? 'eye-off-outline' : 'eye-outline'"
+          ></ion-icon>
+        </ion-button>
+      </div>
+      <div
+        *ngIf="registerForm.controls['contrasena'].touched && registerForm.controls['contrasena'].errors?.['required']"
+      >
+        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
+        <ion-text class="notificaciones"> Este campo es obligatorio</ion-text>
+      </div>
+
+      <div *ngIf="registerForm.controls['contrasena'].touched && registerForm.controls['contrasena'].errors?.['minlength']">
+        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
+        <ion-text class="notificaciones"> La contraseña debe tener más de 6 dígitos</ion-text>
+      </div>
+      
+      
+
+      <!--===========Confirmar Contraseña===========-->
+      <label class="my-label">Confirmar Contraseña</label>
+      <div style="display: flex; align-items: center; position: relative">
+        <ion-input
+          class="input"
+          type="{{ mostrarConfirmarContrasena ? 'text' : 'password' }}"
+          formControlName="confirmar_contrasena"
+          required
+        ></ion-input>
+        <ion-button
+          class="mostrar-contrasena"
+          fill="clear"
+          slot="end"
+          (click)="toggleMostrarConfirmarContrasena()"
+          color="transparent"
+          style="position: absolute; right: 0; z-index: 2"
+        >
+          <ion-icon
+            [name]="mostrarConfirmarContrasena ? 'eye-off-outline' : 'eye-outline'"
+          ></ion-icon>
+        </ion-button>
+      </div>
+      <div
+        *ngIf="registerForm.controls['confirmar_contrasena'].touched && registerForm.controls['confirmar_contrasena'].errors?.['required']"
+      >
+        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
+        <ion-text class="notificaciones"> Este campo es obligatorio</ion-text>
+      </div>
+
+      <div
+        *ngIf="registerForm.controls['confirmar_contrasena'].touched && registerForm.value.contrasena !== registerForm.value.confirmar_contrasena"
+      >
+        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
+        <ion-text class="notificaciones"> Las contraseñas deben ser iguales</ion-text>
+      </div>
+
+
+      <ion-button expand="full" type="submit" (click)="validarFormulario()">Registrarse</ion-button>
+    </form>
+  </div>
+</div>

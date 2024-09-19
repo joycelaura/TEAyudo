@@ -1,0 +1,117 @@
+.form-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  background-color: none;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 0 auto; /* Centra el formulario horizontalmente */
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column; /* Asegura que los elementos dentro se apilen verticalmente */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-height: 100%; /* Ajusta la altura máxima para que se adapte al contenido */
+  overflow-y: auto; /* Agrega desplazamiento vertical si el contenido es demasiado largo */
+  background: #060c24;
+}
+
+.header-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 300px;
+}
+
+.header-image {
+  max-width: 100%; /* Ajusta el ancho máximo para que la imagen sea responsive */
+  max-height: 100%; /* Ajusta la altura máxima para que la imagen sea responsive */
+}
+
+
+ion-content {
+  --background: none;
+  background: #28429f;
+}
+
+.boton_1 {
+  color: white;
+}
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  background: #060c24;
+}
+
+.notificaciones{
+  color: rgb(204, 42, 42);
+  text-align: left;
+}
+
+.subtittle {
+  font-size: 20px;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+
+.Titulo_1 {
+  text-align: center;
+  font-size: 40px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.my-label {
+  font-size: 20px;
+  display: block; /* Esto hace que los labels se apilen verticalmente */
+  margin-bottom: 5px; /* Ajusta este valor para cambiar el espacio entre los labels */
+  color: white;
+  text-align: left;
+}
+
+.input {
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #008dda;
+  //color: white;
+  background-color: white;
+}
+
+form {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+
+  ion-item {
+    --padding-start: 0;
+    --padding-end: 0;
+  }
+
+  ion-button {
+    margin-top: 20px;
+    --background: #5271ff;
+    --border-radius: 20px !important;
+    box-shadow: white;
+    --padding-start: 20px; /* Opcional: cambia el relleno izquierdo del botón */
+    --padding-end: 20px;
+  }
+}
+
+.mostrar-contrasena {
+  position: absolute;
+  right: 10px;
+  transform: translateY(-15%);
+  z-index: 2;
+  color: black;
+}

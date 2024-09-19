@@ -1,0 +1,42 @@
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #CDE1FF;
+}
+
+.boton_1 {
+  color: white;
+}
+
+.title_2 {
+  text-align: center;
+  font-size: 50px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  color: #fff;
+}
+
+.edit-button {
+  --background: transparent;
+  --color: #fff; /* Cambia el color del icono a blanco */
+}
+
+:root {
+  --ion-item-background: #f0f0f0;
+}
+
+/* En tu archivo usuario.page.scss */
+
+.custom-item {
+  --background: white; /* Cambia este valor al color que prefieras */
+  padding: 5px;
+  --border-radius: 20px; /* Establece el radio de borde para hacerlo redondo */
+  --highlight-background-focused: none; /* Evita que el resaltado en foco afecte el diseño */
+}
+ion-item{
+  margin-top:25px;
+}
