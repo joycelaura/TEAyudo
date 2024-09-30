@@ -11,6 +11,7 @@ import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 import { environment } from "src/environments/environment";
 import { SharedModule } from "./shared/shared.module";
+import { IonicStorageModule } from "@ionic/storage-angular";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { SharedModule } from "./shared/shared.module";
     AngularFireAuthModule,
     AngularFireStorageModule,
     SharedModule,
+    IonicStorageModule.forRoot(),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

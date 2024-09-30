@@ -2,10 +2,11 @@ ion-content {
   --padding-start: 0;
   --padding-end: 0;
   --padding-top: 0;
-  --padding-bottom: 0; 
-  --background:none;
-  background-color: #CDE1FF;
+  --padding-bottom: 0;
+  --background: none;
+  background-color: var(--ion-background-color); /* Cambia según el tema */
 }
+
 body {
   margin: 0;
   height: 100%;
@@ -17,6 +18,7 @@ body {
   bottom: 0;
   width: 100%;
 }
+
 .button-grid {
   display: flex;
   flex-direction: column;
@@ -29,4 +31,20 @@ ion-button {
   height: 200px; /* Define una altura fija */
   margin-bottom: 10px; /*Espacio entre los botones*/
   border-radius: 0 !important; /* Elimina el borde redondeado de Ionic */
+  --background: var(--ion-button-background); /* Variable que cambia según el tema */
+  color: var(--ion-button-text-color); /* Color del texto según el tema */
+}
+
+/* Estilo específico para el tema claro */
+body.light-theme {
+  --ion-background-color: #CDE1FF; /* Fondo en tema claro */
+  --ion-button-background: #007bff; /* Color del botón en tema claro */
+  --ion-button-text-color: #ffffff; /* Texto del botón en tema claro */
+}
+
+/* Estilo específico para el tema oscuro */
+body.dark-theme {
+  --ion-background-color: #1e1e1e; /* Fondo en tema oscuro */
+  --ion-button-background: #ea3a3a; /* Color del botón en tema oscuro */
+  --ion-button-text-color: #ffffff; /* Texto del botón en tema oscuro */
 }

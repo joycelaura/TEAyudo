@@ -8,20 +8,23 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TabsComponent } from "./component/tabs/tabs.component";
 
 import { RouterModule } from "@angular/router";
+import { ThemeToggleComponent } from "./component/theme/theme-toggle/theme-toggle.component";
 
 @NgModule({
   declarations: [
     HeaderComponent,
     CustomInputComponent,
     LogoComponent,
-    TabsComponent
+    TabsComponent,
+    ThemeToggleComponent,
   ],
   exports: [
     HeaderComponent,
     CustomInputComponent,
     LogoComponent,
     ReactiveFormsModule,
-    TabsComponent
+    TabsComponent,
+    ThemeToggleComponent,
   ],
   imports: [
     CommonModule,
