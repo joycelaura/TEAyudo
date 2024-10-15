@@ -29,18 +29,15 @@
       >
         <ion-text>El correo electrónico debe ser válido</ion-text>
       </div>
+
       <ion-item>
         <ion-input
           formControlName="password"
           placeholder="Contraseña"
-          type="{{ showPassword ? 'text' : 'password' }}"
+          [type] = "showPassword ? 'text' : 'password'"
           class="input"
         ></ion-input>
-        <ion-icon name="{{ showPassword ? 'eye-outline' : 'eye-off-outline' }}"></ion-icon>
-        <!-- Botón para mostrar/ocultar contraseña -->
-        <ion-button fill="clear" slot="end" (click)="togglePasswordVisibility()">
-          <ion-icon name="{{ showPassword ? 'eye-outline' : 'eye-off-outline' }}"></ion-icon>
-        </ion-button>
+        <!--ion-toggle slot="end" (ionChange)="togglePasswordVisibility()"></ion-toggle>-->
       </ion-item>
       <div
         *ngIf="form.controls['password'].touched && form.controls['password'].errors['required']"

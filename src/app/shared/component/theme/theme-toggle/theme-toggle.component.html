@@ -1,3 +1,22 @@
+<!-- 
 <ion-button (click)="toggleTheme()">
   Cambiar a {{ getCurrentTheme() === 'light' ? 'Oscuro' : 'Claro' }}
-</ion-button>
+</ion-button> -->
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <div class="button-grid">
+      <ion-button (click)="changeTheme('default')">Tema Predeterminado</ion-button>
+      <ion-button (click)="changeTheme('dark')">Tema Oscuro</ion-button>
+      <ion-button (click)="changeTheme('light')">Tema Claro</ion-button>
+      <ion-button (click)="changeTheme('amarillo')">Tema Amarillo</ion-button>
+      <ion-button (click)="changeTheme('pastel')">Tema Pastel</ion-button>
+      <ion-button (click)="changeTheme('rojo')">Tema Rojo</ion-button>
+      <ion-button (click)="changeTheme('azul')">Tema Azul</ion-button>
+      <ion-button (click)="changeTheme('verde')">Tema Verde</ion-button>
+      <ion-button (click)="changeTheme('morado')">Tema Morado</ion-button>
+      <ion-button (click)="changeTheme('rosa')">Tema Rosa</ion-button>
+      <ion-button></ion-button>
+    </div>
+  </div>
+</ion-content>

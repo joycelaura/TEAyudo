@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 import { User } from "src/app/models/user.model";
 import { FirestoreService } from "src/app/services/firestore.service";
 import { UtilsService } from "src/app/services/utils.service";
@@ -12,6 +12,7 @@ import { LoadingController } from "@ionic/angular";
   templateUrl: "./login.page.html",
   styleUrls: ["./login.page.scss"],
 })
+
 export class LoginPage implements OnInit {
   form = new FormGroup({
     email: new FormControl("", [Validators.required, Validators.email]),

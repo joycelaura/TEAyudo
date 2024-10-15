@@ -3,24 +3,159 @@
 
 /** Ionic CSS Variables **/
 :root {
+  /*
   --ion-color-primary: #3880ff;
   --ion-color-secondary: #3dc2ff;
   --ion-background-color: #ffffff; /* Fondo claro */
+
+  /*Tema por Defecto*/
+  --theme-default-background: #1b4ead; /*Color de Fondo*/
+  --theme-default-button: #3880ff; /*Color de Boton por defecto*/
+  --theme-default-button-emociones: #ff9800; /* boton de inicio de arriba*/
+  --theme-default-button-calendario: #ffeb3b; /* boton de inicio de abajo */
+
+  /*Tema Oscuro*/
+  --theme-dark-background: #000000; /*Color de Fondo*/
+  --theme-dark-button: #2f3542; /*Color de Boton negro*/
+  --theme-dark-button-emociones: #a4b0be;  /* boton de inicio de arriba*/
+  --theme-dark-button-calendario: #747d8c; /* boton de inicio de abajo */
+  
+  /*Tema Claro*/
+  --theme-light-background: #ffffff; /*Color de Fondo*/
+  --theme-light-button: #3d40413b; /*Color de Boton claro*/
+  --theme-light-button-emociones: #78afe7; /* boton de inicio de arriba*/
+  --theme-light-button-calendario: #ffffff; /* boton de inicio de abajo */
+
+  /*Tema Amarillo*/
+  --theme-amarillo-background: #e6cc77;
+  --theme-amarillo-button: #f9ca24;
+  --theme-amarillo-button-emociones: #fff200;/* boton de inicio de arriba*/
+  --theme-amarillo-button-calendario: #efdf33;/* boton de inicio de abajo */
+
+  /*Tema pastel*/
+  --theme-pastel-background: #f8a5c2; /*Color de Fondo*/
+  --theme-pastel-button: #9bdbe1; /*Color de Boton pastel*/
+  --theme-pastel-button-emociones: #ea8685; /* boton de inicio de arriba*/
+  --theme-pastel-button-calendario: #786fa6; /* boton de inicio de abajo */
+
+  /*Tema rojo*/
+  --theme-rojo-background: #a12323; /*Color de Fondo*/
+  --theme-rojo-button: #eb2f06; /*Color de Boton claro*/
+  --theme-rojo-button-emociones: #e55039; /* boton de inicio de arriba*/
+  --theme-rojo-button-calendario: #e84118; /* boton de inicio de abajo */
+
+  /*Tema azul*/
+  --theme-azul-background: #3742fa; /*Color de Fondo*/
+  --theme-azul-button: #3742fa; /*Color de Boton claro*/
+  --theme-azul-button-emociones: #1e90ff; /* boton de inicio de arriba*/
+  --theme-azul-button-calendario: #1e90ff; /* boton de inicio de abajo */
+
+  /*Tema verde*/
+  --theme-verde-background: #009432; /*Color de Fondo*/
+  --theme-verde-button: #009432; /*Color de Boton claro*/
+  --theme-verde-button-emociones: #A3CB38; /* boton de inicio de arriba*/
+  --theme-verde-button-calendario: #A3CB38; /* boton de inicio de abajo */
+
+  /*Tema morado*/
+  --theme-morado-background: #66117b; /*Color de Fondo*/
+  --theme-morado-button: #66117b; /*Color de Boton claro*/
+  --theme-morado-button-emociones: #8854d0; /* boton de inicio de arriba*/
+  --theme-morado-button-calendario: #8854d0; /* boton de inicio de abajo */
+
+  /*Tema rosa*/
+  --theme-rosa-background: #f78fb3; /*Color de Fondo*/
+  --theme-rosa-button: #f8a5c2; /*Color de Boton claro*/
+  --theme-rosa-button-emociones: #ffb8b8; /* boton de inicio de arriba*/
+  --theme-rosa-button-calendario: #ffb8b8; /* boton de inicio de abajo */
+
+  
 }
 
-.light-theme {
-  --ion-background-color: #ffffff;
-  --ion-color-primary: #3880ff;
-  --ion-color-secondary: #3dc2ff;
-  --ion-tab-bar-background-color: #f4f4f4;
+body.default-theme {
+  --background: var(--theme-default-background);
+  --button: var(--theme-default-button);
+  --button-emociones: var(--theme-default-button-emociones);
+  --button-calendario: var(--theme-default-button-calendario);
 }
 
-.dark-theme {
-  --ion-background-color: #4679de;
-  --ion-color-primary: #f4f4f4;
-  --ion-color-secondary: #3dc2ff;
-  --ion-tab-bar-background-color: #111111;
+body.dark-theme {
+  --background: var(--theme-dark-background);
+  --button: var(--theme-dark-button);
+  --button-emociones: var(--theme-dark-button-emociones);
+  --button-calendario: var(--theme-dark-button-calendario);
 }
+
+body.light-theme {
+  --background: var(--theme-light-background);
+  --button: var(--theme-light-button);
+  --button-emociones: var(--theme-light-button-emociones);
+  --button-calendario: var(--theme-light-button-calendario);
+}
+
+body.amarillo-theme {
+  --background: var(--theme-amarillo-background);
+  --button: var(--theme-amarillo-button);
+  --button-emociones: var(--theme-amarillo-button-emociones);
+  --button-calendario: var(--theme-amarillo-button-calendario);
+}
+
+body.pastel-theme {
+  --background: var(--theme-pastel-background);
+  --button: var(--theme-pastel-button);
+  --button-emociones: var(--theme-pastel-button-emociones);
+  --button-calendario: var(--theme-pastel-button-calendario);
+}
+
+body.rojo-theme {
+  --background: var(--theme-rojo-background);
+  --button: var(--theme-rojo-button);
+  --button-emociones: var(--theme-rojo-button-emociones);
+  --button-calendario: var(--theme-rojo-button-calendario);
+}
+
+body.azul-theme {
+  --background: var(--theme-azul-background);
+  --button: var(--theme-azul-button);
+  --button-emociones: var(--theme-azul-button-emociones);
+  --button-calendario: var(--theme-azul-button-calendario);
+}
+
+body.verde-theme {
+  --background: var(--theme-verde-background);
+  --button: var(--theme-verde-button);
+  --button-emociones: var(--theme-verde-button-emociones);
+  --button-calendario: var(--theme-verde-button-calendario);
+}
+
+body.morado-theme {
+  --background: var(--theme-morado-background);
+  --button: var(--theme-morado-button);
+  --button-emociones: var(--theme-morado-button-emociones);
+  --button-calendario: var(--theme-morado-button-calendario);
+}
+
+body.rosa-theme {
+  --background: var(--theme-rosa-background);
+  --button: var(--theme-rosa-button);
+  --button-emociones: var(--theme-rosa-button-emociones);
+  --button-calendario: var(--theme-rosa-button-calendario);
+}
+
+
+// .light-theme {
+//   --ion-background-color: #ffffff;
+//   --ion-color-primary: #3880ff;
+//   --ion-color-secondary: #3dc2ff;
+//   --ion-tab-bar-background-color: #f4f4f4;
+// }
+
+// .dark-theme {
+//   --ion-background-color: #4679de;
+//   --ion-color-primary: #f4f4f4;
+//   --ion-color-secondary: #3dc2ff;
+//   --ion-tab-bar-background-color: #111111;
+// }
+
 html {
   /* 
    * For more information on dynamic font scaling, visit the documentation:

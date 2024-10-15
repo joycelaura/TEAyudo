@@ -127,3 +127,23 @@ ion-button {
     --height: 680px;
   }
 }
+
+body {
+  background-color: var(--background);
+}
+
+ion-button {
+  --background: var(--button);
+}
+
+ion-button.emociones {
+  --background: var(--button-emociones);
+}
+
+ion-button.calendario {
+  --background: var(--button-calendario);
+}
+
+.page-home {
+  background-color: var(--background);
+}

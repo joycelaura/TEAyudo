@@ -15,31 +15,21 @@
         label="Nombre: "
         #nombreInput
         type="text"
-        readonly="true"
+        [readonly]="!isEditable"
         [(ngModel)]="nombre"
       ></ion-input>
     </ion-item>
-
-    <ion-item
-      lines="none"
-      button
-      class="ion-margin-top custom-item"
-      routerLink="forgot-password"
-    >
-      <ion-input
-        readonly="true"
+    
+    <ion-item lines="none" class="ion-margin-top custom-item">
+      <ion-input 
         label="Contraseña: "
         #contrasenaInput
-        type="password"
+        [type]="showPassword ? 'text' : 'password'"
+        [readonly]="!isEditable"
         [(ngModel)]="password"
       ></ion-input>
-      <ion-button
-        slot="end"
-        fill="clear"
-        class="edit-button"
-        (click)="toggleEdit()"
-      >
-        <ion-icon name="create-outline" color="dark"></ion-icon>
+      <ion-button slot="end" fill="clear" (click)="togglePasswordVisibility()">
+        <ion-icon [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
       </ion-button>
     </ion-item>
 
@@ -47,7 +37,7 @@
       <ion-input
         label="Correo Electrónico: "
         type="email"
-        readonly="true"
+        [readonly]="!isEditable"
         [(ngModel)]="correo"
       ></ion-input>
     </ion-item>

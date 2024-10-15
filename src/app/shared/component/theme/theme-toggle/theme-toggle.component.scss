@@ -1,0 +1,29 @@
+ion-content {
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --background: none;
+    background-color: var(--ion-background-color); /* Cambia según el tema */
+  }
+  
+  body {
+    margin: 0;
+    height: 100%;
+  }
+  
+  /* Aqui se definen las propiedades de la cuadricula de los botones */
+  .button-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra verticalmente los botones */
+    margin-top: 2vh; /*Esto es el margen del boton con el appbar */
+  }
+  
+  /* Aqui se definien las propiedades de los botones */
+  ion-button {
+    width: 200px; /* Define un ancho fijo */
+    height: 100px; /* Define una altura fija */
+    margin-bottom: 10px; /*Espacio entre los botones*/
+    border-radius: 0 !important; /* Elimina el borde redondeado de Ionic */
+  }

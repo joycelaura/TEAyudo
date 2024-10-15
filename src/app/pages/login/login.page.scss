@@ -59,9 +59,13 @@ ion-text{
   ion-icon {
     position: absolute;
     right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #000;
   }
 
   ion-item {
+    position: relative;
     --border-radius: 20px; /* Establece el radio de borde para hacerlo redondo */
     --highlight-background-focused: none; /* Evita que el resaltado en foco afecte el diseño */
     margin-top: 20px;

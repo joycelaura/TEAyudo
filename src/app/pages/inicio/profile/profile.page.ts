@@ -24,7 +24,10 @@ export class ProfilePage implements OnInit {
   nombre: string = "";
   password: string = "";
   correo: string = "";
-  isEditable = true;
+  //isEditable = true;
+
+  isEditable = false;
+  showPassword = false;
 
   constructor(
     private firestoreSvc: FirestoreService,
@@ -50,6 +53,10 @@ export class ProfilePage implements OnInit {
 
   toggleEdit() {
     this.isEditable = !this.isEditable;
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
   //==========cerrar sesion============

@@ -10,8 +10,20 @@ export class ThemeToggleComponent {
 
   constructor(private themeService: ThemeService) { }
 
+  /*
   toggleTheme() {
     this.themeService.toggleTheme();
+  }*/
+
+  /*
+  getCurrentTheme() {
+    return this.themeService.getCurrentTheme();
+  }
+  */
+
+
+  changeTheme(theme: string) {
+    this.themeService.setTheme(theme);
   }
 
   getCurrentTheme() {
