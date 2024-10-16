@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header >
+  <ion-toolbar >
     <ion-buttons slot="start">
       <ion-back-button defaultHref="inicio/home"></ion-back-button>
     </ion-buttons>
@@ -7,11 +7,21 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div class="emotion-grid">
-    <div class="emotion-item ira">Ira</div>
-    <div class="emotion-item alegria">Alegría</div>
-    <div class="emotion-item tristeza">Tristeza</div>
-    <div class="emotion-item miedo">Miedo</div>
-  </div>
+<ion-content>
+  <ion-grid>
+    <!--copiar y pegar hasta la linea 24-->
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="block" style="--background: var(--button-emociones);" (click)="onEmotionClick('anger')">
+          <ion-icon name="alert-circle-outline"></ion-icon> Ira
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" style="--background: var(--button-emociones);" (click)="onEmotionClick('joy')">
+          <ion-icon name="happy-outline"></ion-icon> Alegría
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <!--Hasta aqui-->
+  </ion-grid>
 </ion-content>
