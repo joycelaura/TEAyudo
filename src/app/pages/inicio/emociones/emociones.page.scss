@@ -1,0 +1,40 @@
+ion-button {
+    height: 180px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .centrar-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+ion-row {
+    justify-content: center;
+}
+
+ion-icon {
+  margin-right: 10px;
+  font-size: 24px;
+}
+
+ion-content {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --background: none;
+  background-color: var(--ion-background-color); /* Cambia según el tema */
+}
+ion-toolbar {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --background: none;
+  background-color: var(--ion-background-color); /* Cambia según el tema */
+  --color: #ffffff;
+}
