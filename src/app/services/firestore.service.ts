@@ -62,6 +62,7 @@ export class FirestoreService {
           nombre: user.nombre,
           email: user.email,
           password: user.password,
+          telefono: user.telefono,
         });
       });
   }

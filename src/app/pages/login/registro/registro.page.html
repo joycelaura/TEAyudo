@@ -1,26 +1,26 @@
-<app-header backbutton="/login" ></app-header>
+<!--<app-header backbutton="/login" ></app-header>
 
 <div class="app-container">
 
   <div class="form-container">
     <div class="header-image-container">
-      <img src="" class="header-image"> <!--//aqui poner el loog de mi app-->
+      <img src="" class="header-image"> 
   </div>
     <div
       style="display: flex; align-items: center; justify-content: space-between"
     >
     
       
-      <h1 class="Titulo_1" style="text-align: center">  <!--FIXME Sugiero darme un nombre mas descriptivo a esta clase, como titulo o titulo-registro. Por otro lado, evitar utilizar el style argument y en cambio, utilizar la clase creada y darle estilo en el .css-->
+      <h1 class="Titulo_1" style="text-align: center">  
         Unete a TEAyudo
         <p class="subtittle">¿Quieres crearte una cuenta?</p>
       </h1>
       <div></div>
-    </div>
+    </div>-->
     
-    <!--===Formulario===-->
-    <form [formGroup]="registerForm">
-      <!--===========Nombre===========-->
+    <!--===Formulario===--><!--
+    <form [formGroup]="registerForm">-->
+      <!--===========Nombre===========--><!--
       <label class="my-label">Nombre</label>
       <ion-input
         class="input"
@@ -33,9 +33,10 @@
       >
         <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
         <ion-text class="notificaciones"> Este campo es obligatorio</ion-text>
-      </div>
-      <!--===========Correo Electronico===========-->
-      <label class="my-label">Correo Electronico</label> <!--FIXME Lo mismo para esta clase, un nombre mas descriptivo que no pueda dar conflicto con el codigo de otros equipso-->
+      </div>-->
+
+      <!--===========Correo Electronico===========--><!--
+      <label class="my-label">Correo Electronico</label> 
       <ion-input
         class="input"
         type="text"
@@ -54,10 +55,10 @@
       >
         <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
         <ion-text class="notificaciones"> El correo electrónico debe ser válido</ion-text>
-      </div>
+      </div>-->
       
-      <!--===========Contraseña===========-->
-      <label class="my-label">Contraseña</label>  <!--FIXME Lo mismo para esta clase, un nombre mas descriptivo que no pueda dar conflicto con el codigo de otros equipso-->
+      <!--===========Contraseña===========--><!--
+      <label class="my-label">Contraseña</label>  
       <div style="display: flex; align-items: center; position: relative">
         <ion-input
           class="input"
@@ -88,11 +89,11 @@
       <div *ngIf="registerForm.controls['contrasena'].touched && registerForm.controls['contrasena'].errors?.['minlength']">
         <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
         <ion-text class="notificaciones"> La contraseña debe tener más de 6 dígitos</ion-text>
-      </div>
+      </div>-->
       
       
 
-      <!--===========Confirmar Contraseña===========-->
+      <!--===========Confirmar Contraseña===========--><!--
       <label class="my-label">Confirmar Contraseña</label>
       <div style="display: flex; align-items: center; position: relative">
         <ion-input
@@ -126,10 +127,66 @@
       >
         <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
         <ion-text class="notificaciones"> Las contraseñas deben ser iguales</ion-text>
-      </div>
+      </div>-->
 
+      <!--===========telefono===========--><!--
+      <label class="my-label">Telefono del Tutor</label>
+      <ion-input
+        class="input"
+        type="number"
+        formControlName="telefono"
+        required
+      ></ion-input>      
+      <div
+        *ngIf="registerForm.controls['telefono'].touched && registerForm.controls['telefono'].errors?.['required']"
+      >
+        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
+        <ion-text class="notificaciones"> Este campo es obligatorio</ion-text>
+      </div>
 
       <ion-button expand="full" type="submit" (click)="validarFormulario()">Registrarse</ion-button>
     </form>
   </div>
-</div>
+</div>-->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="registerForm" (ngSubmit)="validarFormulario()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input type="text" formControlName="nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Correo Electrónico</ion-label>
+      <ion-input type="email" formControlName="correo"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input [type]="mostrarContrasena ? 'text' : 'password'" formControlName="contrasena"></ion-input>
+      <ion-button (click)="toggleMostrarContrasena()">
+        {{ mostrarContrasena ? 'Ocultar' : 'Mostrar' }}
+      </ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Confirmar Contraseña</ion-label>
+      <ion-input [type]="mostrarConfirmarContrasena ? 'text' : 'password'" formControlName="confirmar_contrasena"></ion-input>
+      <ion-button (click)="toggleMostrarConfirmarContrasena()">
+        {{ mostrarConfirmarContrasena ? 'Ocultar' : 'Mostrar' }}
+      </ion-button>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Teléfono</ion-label>
+      <ion-input type="tel" formControlName="telefono"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="!registerForm.valid">Registrar</ion-button>
+  </form>
+</ion-content>
