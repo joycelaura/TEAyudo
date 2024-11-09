@@ -1,0 +1,68 @@
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px;
+  }
+  
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    width: 90%;
+    margin-top: 10px;
+  }
+  
+  .day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    height: 80px;
+    border: 1px solid #ccc;  /* Línea entre los días */
+  }
+  
+  .day-number {
+    font-weight: bold;
+  }
+  
+  .imagen {
+    width: auto;
+    height: px;  /*Mantiene la proporción original */
+  }
+  
+  /*Estilo para las celdas del calendario */
+  .day-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;  /*Agregar un borde entre las celdas */
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    height: 100px;
+  
+  }
+  
+  .day-box span {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+  
+  .day-box img {
+    margin-top: 5px;
+    width: 30px;
+    height: auto;
+  }

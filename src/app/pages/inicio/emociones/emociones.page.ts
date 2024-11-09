@@ -35,22 +35,25 @@ export class EmocionesPage implements OnInit {
     document.body.classList.add(currentTheme);
   }
 
-  async onEmotionClick(emotionName: string) {
-    const emotion: Emotion = {
-      name: emotionName,
-      count: 1,  // Valor inicial, pero este se incrementará en Firestore
-      lastUpdated: new Date()
-    };
-
-    if (this.userEmail) {
-      await this.firestoreSvc.saveEmotionCount(this.userEmail, emotion);
-      this.loadEmotionCounts();  // Recargar los contadores
+  onEmotionClick(emotion: string) {
+    const email = localStorage.getItem('userEmail');
+    if (email) {
+      const today = new Date();
+      const dateKey = this.formatDate(today);
+      this.firestoreSvc.saveEmotionCount(email, emotion, dateKey);
     } else {
-      console.log("No user authenticated.");
+      console.log("No se encontró email en el localStorage.");
     }
   }
 
-  async loadEmotionCounts() {
+  // Función auxiliar para formatear fechas
+  private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+async loadEmotionCounts() {
     if (this.userEmail) {
       this.emotions = await this.firestoreSvc.getEmotionCount(this.userEmail);
       console.log("Emotions loaded:", this.emotions);

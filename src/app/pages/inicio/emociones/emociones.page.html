@@ -1,5 +1,5 @@
-<ion-header >
-  <ion-toolbar >
+<ion-header>
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="inicio/home"></ion-back-button>
     </ion-buttons>
@@ -7,21 +7,67 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="centrar-grid">
   <ion-grid>
-    <!--copiar y pegar hasta la linea 24-->
     <ion-row>
-      <ion-col size="6">
-        <ion-button expand="block" style="--background: var(--button-emociones);" (click)="onEmotionClick('anger')">
-          <ion-icon name="alert-circle-outline"></ion-icon> Ira
+      <ion-col size="6" size-md="2">
+        <ion-button expand="block" style="--background: var(--button-emociones);" (click)="onEmotionClick('enojo')">
+          <div class="day-box">
+            Ira
+          <ion-icon src="assets/svg_emo/enojo.svg"></ion-icon> 
+          </div>
         </ion-button>
       </ion-col>
-      <ion-col size="6">
-        <ion-button expand="block" style="--background: var(--button-emociones);" (click)="onEmotionClick('joy')">
-          <ion-icon name="happy-outline"></ion-icon> Alegría
+      <ion-col size="6" size-md="2">
+        <ion-button expand="block" style="--background: var(--button-emociones);" (click)="onEmotionClick('alegre')">
+          <ion-icon src="assets/svg_emo/alegre.svg"></ion-icon> 
+          Alegría
         </ion-button>
       </ion-col>
     </ion-row>
-    <!--Hasta aqui-->
+
+    <ion-row>
+      <ion-col size="6" size-md="2">
+        <ion-button expand="block" style="--background: var(--button-emociones);" (click)="onEmotionClick('mujer')">
+          <ion-icon src="assets/svg_emo/mujer.svg"></ion-icon> 
+          Tristeza
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" size-md="2">
+        <ion-button expand="block" style="--background: var(--button-emociones);" (click)="onEmotionClick('paranoia')">
+          <ion-icon src="assets/svg_emo/paranoia.svg"></ion-icon> 
+          Miedo
+        </ion-button>
+      </ion-col>
+    </ion-row>
+<ion-row>
+      <ion-col size="6" size-md="2">
+        <ion-button expand="block" style="--background: var(--button-emociones);" (click)="onEmotionClick('pulgares-para-arriba')">
+          <ion-icon src="assets/svg_emo/pulgares-para-arriba.svg" ></ion-icon> 
+          Agrado
+        </ion-button>
+      </ion-col>
+
+      <ion-col size="6" size-md="2">
+        <ion-button expand="block" style="--background: var(--button-emociones);" (click)="onEmotionClick('shamee')">
+          <ion-icon src="assets/svg_emo/shamee.svg" ></ion-icon> 
+          Vergüenza
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6" size-md="2">
+        <ion-button expand="block" style="--background: var(--button-emociones);" (click)="onEmotionClick('amor-propio')">
+          <ion-icon src="assets/svg_emo/amor-propio.svg" ></ion-icon> 
+          Necesito Contención
+        </ion-button>
+      </ion-col>
+      <ion-col size="6" size-md="2">
+        <ion-button expand="block" style="--background: var(--button-emociones);" (click)="onEmotionClick('alone')">
+          Quiero estar solo
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>
