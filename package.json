@@ -36,6 +36,7 @@
     "firebase-tools": "^13.5.2",
     "ion2-calendar": "^3.5.0",
     "ionic": "^5.4.16",
+    "ionic5-calendar": "^0.5.9",
     "ionicons": "^7.0.0",
     "localforage": "^1.10.0",
     "ol": "^9.1.0",

@@ -4,6 +4,7 @@ ion-button {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
   .centrar-grid {
     display: flex;
@@ -17,8 +18,9 @@ ion-row {
 }
 
 ion-icon {
-  margin-right: 10px;
-  font-size: 24px;
+  margin-right: 80px;
+  font-size: 80px;
+  margin-bottom: 8px;
 }
 
 ion-content {

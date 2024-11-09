@@ -128,7 +128,7 @@ export class RegistroPage {
       correo: new FormControl(null, [Validators.required, Validators.email]),
       contrasena: new FormControl(null, [Validators.required, Validators.minLength(6)]),
       confirmar_contrasena: new FormControl(null, Validators.required),
-      telefono: new FormControl(null, [Validators.required, Validators.maxLength(11)]),
+      telefono: new FormControl(null, [Validators.required, Validators.maxLength(12)]),
     });
   }
 

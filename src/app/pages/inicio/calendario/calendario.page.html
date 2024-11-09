@@ -7,8 +7,39 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div class="calendar">
-    <!-- calendario -->
-  </div>
+<ion-content>
+  <ion-grid>
+    <!-- Selector de mes -->
+    <ion-row>
+      <ion-col size="6">
+        <ion-select [(ngModel)]="currentMonth" (ionChange)="updateCalendar()" interface="popover">
+          <ion-select-option *ngFor="let month of monthNames; let i = index" [value]="i">{{ month }}</ion-select-option>
+        </ion-select>
+      </ion-col>
+
+      <!-- Selector de año -->
+      <ion-col size="6">
+        <ion-select [(ngModel)]="currentYear" (ionChange)="updateCalendar()" interface="popover">
+          <ion-select-option *ngFor="let year of yearRange" [value]="year">{{ year }}</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+
+    <!-- Mostrar el mes y el año seleccionados -->
+    <ion-row>
+      <ion-col size="12">
+        <ion-title>{{ monthNames[currentMonth] }} {{ currentYear }}</ion-title>
+      </ion-col>
+    </ion-row>
+
+    <!-- Mostrar los días del mes -->
+    <ion-row>
+      <ion-col *ngFor="let day of days" size="3">
+        <div class="day-box">
+          <span>{{ day }}</span>
+          <img *ngIf="getDominantEmotionIcon(day)" [src]="getDominantEmotionIcon(day)" alt="Dominant Emotion" class="imagen">
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
