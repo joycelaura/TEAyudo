@@ -1,192 +1,89 @@
-<!--<app-header backbutton="/login" ></app-header>
-
-<div class="app-container">
-
-  <div class="form-container">
-    <div class="header-image-container">
-      <img src="" class="header-image"> 
-  </div>
-    <div
-      style="display: flex; align-items: center; justify-content: space-between"
-    >
-    
-      
-      <h1 class="Titulo_1" style="text-align: center">  
-        Unete a TEAyudo
-        <p class="subtittle">¿Quieres crearte una cuenta?</p>
-      </h1>
-      <div></div>
-    </div>-->
-    
-    <!--===Formulario===--><!--
-    <form [formGroup]="registerForm">-->
-      <!--===========Nombre===========--><!--
-      <label class="my-label">Nombre</label>
-      <ion-input
-        class="input"
-        type="text"
-        formControlName="nombre"
-        required
-      ></ion-input>      
-      <div
-        *ngIf="registerForm.controls['nombre'].touched && registerForm.controls['nombre'].errors?.['required']"
-      >
-        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
-        <ion-text class="notificaciones"> Este campo es obligatorio</ion-text>
-      </div>-->
-
-      <!--===========Correo Electronico===========--><!--
-      <label class="my-label">Correo Electronico</label> 
-      <ion-input
-        class="input"
-        type="text"
-        formControlName="correo"
-        placeholder="nombre@gmail.com"
-        required
-      ></ion-input>
-      <div
-        *ngIf="registerForm.controls['correo'].touched && registerForm.controls['correo'].errors?.['required']"
-      >
-        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
-        <ion-text class="notificaciones"> Este campo es obligatorio</ion-text>
-      </div>
-      <div
-        *ngIf="registerForm.controls['correo'].touched && registerForm.controls['correo'].value && !registerForm.controls['correo'].value.includes('@')"
-      >
-        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
-        <ion-text class="notificaciones"> El correo electrónico debe ser válido</ion-text>
-      </div>-->
-      
-      <!--===========Contraseña===========--><!--
-      <label class="my-label">Contraseña</label>  
-      <div style="display: flex; align-items: center; position: relative">
-        <ion-input
-          class="input"
-          type="{{ mostrarContrasena ? 'text' : 'password' }}"
-          formControlName="contrasena"
-          required
-        ></ion-input>
-        <ion-button
-          class="mostrar-contrasena"
-          fill="clear"
-          slot="end"
-          (click)="toggleMostrarContrasena()"
-          color="transparent"
-          style="position: absolute; right: 0; z-index: 2"
-        >
-          <ion-icon
-            [name]="mostrarContrasena ? 'eye-off-outline' : 'eye-outline'"
-          ></ion-icon>
-        </ion-button>
-      </div>
-      <div
-        *ngIf="registerForm.controls['contrasena'].touched && registerForm.controls['contrasena'].errors?.['required']"
-      >
-        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
-        <ion-text class="notificaciones"> Este campo es obligatorio</ion-text>
-      </div>
-
-      <div *ngIf="registerForm.controls['contrasena'].touched && registerForm.controls['contrasena'].errors?.['minlength']">
-        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
-        <ion-text class="notificaciones"> La contraseña debe tener más de 6 dígitos</ion-text>
-      </div>-->
-      
-      
-
-      <!--===========Confirmar Contraseña===========--><!--
-      <label class="my-label">Confirmar Contraseña</label>
-      <div style="display: flex; align-items: center; position: relative">
-        <ion-input
-          class="input"
-          type="{{ mostrarConfirmarContrasena ? 'text' : 'password' }}"
-          formControlName="confirmar_contrasena"
-          required
-        ></ion-input>
-        <ion-button
-          class="mostrar-contrasena"
-          fill="clear"
-          slot="end"
-          (click)="toggleMostrarConfirmarContrasena()"
-          color="transparent"
-          style="position: absolute; right: 0; z-index: 2"
-        >
-          <ion-icon
-            [name]="mostrarConfirmarContrasena ? 'eye-off-outline' : 'eye-outline'"
-          ></ion-icon>
-        </ion-button>
-      </div>
-      <div
-        *ngIf="registerForm.controls['confirmar_contrasena'].touched && registerForm.controls['confirmar_contrasena'].errors?.['required']"
-      >
-        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
-        <ion-text class="notificaciones"> Este campo es obligatorio</ion-text>
-      </div>
-
-      <div
-        *ngIf="registerForm.controls['confirmar_contrasena'].touched && registerForm.value.contrasena !== registerForm.value.confirmar_contrasena"
-      >
-        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
-        <ion-text class="notificaciones"> Las contraseñas deben ser iguales</ion-text>
-      </div>-->
-
-      <!--===========telefono===========--><!--
-      <label class="my-label">Telefono del Tutor</label>
-      <ion-input
-        class="input"
-        type="number"
-        formControlName="telefono"
-        required
-      ></ion-input>      
-      <div
-        *ngIf="registerForm.controls['telefono'].touched && registerForm.controls['telefono'].errors?.['required']"
-      >
-        <ion-icon name="alert-circle-outline" class="notificaciones"></ion-icon>
-        <ion-text class="notificaciones"> Este campo es obligatorio</ion-text>
-      </div>
-
-      <ion-button expand="full" type="submit" (click)="validarFormulario()">Registrarse</ion-button>
-    </form>
-  </div>
-</div>-->
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"></ion-back-button>
+    </ion-buttons>
     <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="registerForm" (ngSubmit)="validarFormulario()">
-    <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input type="text" formControlName="nombre"></ion-input>
-    </ion-item>
+  <div class="form-container">
+    <div class="header-image-container">
+      <img src="assets/logo.png" class="header-image" alt="Header image">
+    </div>
 
-    <ion-item>
-      <ion-label position="floating">Correo Electrónico</ion-label>
-      <ion-input type="email" formControlName="correo"></ion-input>
-    </ion-item>
+    <div class="form-content">
+      <h1 class="titulo">Únete a TEAyudo</h1>
+      <p class="subtittle">¿Quieres crearte una cuenta?</p>
 
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input [type]="mostrarContrasena ? 'text' : 'password'" formControlName="contrasena"></ion-input>
-      <ion-button (click)="toggleMostrarContrasena()">
-        {{ mostrarContrasena ? 'Ocultar' : 'Mostrar' }}
-      </ion-button>
-    </ion-item>
+      <form [formGroup]="registerForm" (ngSubmit)="validarFormulario()">
+        <!-- Nombre -->
+        <ion-item [class.invalid]="registerForm.controls['nombre'].invalid && registerForm.controls['nombre'].touched">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input type="text" formControlName="nombre"></ion-input>
+        </ion-item>
+        <div *ngIf="registerForm.controls['nombre'].touched && registerForm.controls['nombre'].errors?.['required']" class="error-message">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <ion-text>Este campo es obligatorio</ion-text>
+        </div>
 
-    <ion-item>
-      <ion-label position="floating">Confirmar Contraseña</ion-label>
-      <ion-input [type]="mostrarConfirmarContrasena ? 'text' : 'password'" formControlName="confirmar_contrasena"></ion-input>
-      <ion-button (click)="toggleMostrarConfirmarContrasena()">
-        {{ mostrarConfirmarContrasena ? 'Ocultar' : 'Mostrar' }}
-      </ion-button>
-    </ion-item>
+        <!-- Correo Electrónico -->
+        <ion-item [class.invalid]="registerForm.controls['correo'].invalid && registerForm.controls['correo'].touched">
+          <ion-label position="floating">Correo Electrónico</ion-label>
+          <ion-input type="email" formControlName="correo"></ion-input>
+        </ion-item>
+        <div *ngIf="registerForm.controls['correo'].touched && registerForm.controls['correo'].errors?.['required']" class="error-message">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <ion-text>Este campo es obligatorio</ion-text>
+        </div>
 
-    <ion-item>
-      <ion-label position="floating">Teléfono</ion-label>
-      <ion-input type="tel" formControlName="telefono"></ion-input>
-    </ion-item>
+        <!-- Contraseña -->
+        <ion-item [class.invalid]="registerForm.controls['contrasena'].invalid && registerForm.controls['contrasena'].touched">
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input [type]="mostrarContrasena ? 'text' : 'password'" formControlName="contrasena"></ion-input>
+          <ion-button fill="clear" (click)="toggleMostrarContrasena()" class="mostrar-contrasena-btn">
+            {{ mostrarContrasena ? 'Ocultar' : 'Mostrar' }}
+          </ion-button>
+        </ion-item>
+        <div *ngIf="registerForm.controls['contrasena'].touched && registerForm.controls['contrasena'].errors?.['required']" class="error-message">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <ion-text>Este campo es obligatorio</ion-text>
+        </div>
+        <div *ngIf="registerForm.controls['contrasena'].touched && registerForm.controls['contrasena'].errors?.['minlength']" class="error-message">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <ion-text>La contraseña debe tener más de 6 caracteres</ion-text>
+        </div>
 
-    <ion-button expand="full" type="submit" [disabled]="!registerForm.valid">Registrar</ion-button>
-  </form>
+        <!-- Confirmar Contraseña -->
+        <ion-item [class.invalid]="registerForm.controls['confirmar_contrasena'].invalid && registerForm.controls['confirmar_contrasena'].touched">
+          <ion-label position="floating">Confirmar Contraseña</ion-label>
+          <ion-input [type]="mostrarConfirmarContrasena ? 'text' : 'password'" formControlName="confirmar_contrasena"></ion-input>
+          <ion-button fill="clear" (click)="toggleMostrarConfirmarContrasena()" class="mostrar-contrasena-btn">
+            {{ mostrarConfirmarContrasena ? 'Ocultar' : 'Mostrar' }}
+          </ion-button>
+        </ion-item>
+        <div *ngIf="registerForm.controls['confirmar_contrasena'].touched && registerForm.controls['confirmar_contrasena'].errors?.['required']" class="error-message">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <ion-text>Este campo es obligatorio</ion-text>
+        </div>
+        <div *ngIf="registerForm.controls['confirmar_contrasena'].touched && registerForm.value.contrasena !== registerForm.value.confirmar_contrasena" class="error-message">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <ion-text>Las contraseñas deben ser iguales</ion-text>
+        </div>
+
+        <!-- Teléfono Tutor -->
+        <ion-item [class.invalid]="registerForm.controls['telefono'].invalid && registerForm.controls['telefono'].touched">
+          <ion-label position="floating">Teléfono Tutor</ion-label>
+          <ion-input type="tel" formControlName="telefono"></ion-input>
+        </ion-item>
+        <div *ngIf="registerForm.controls['telefono'].touched && registerForm.controls['telefono'].errors?.['required']" class="error-message">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <ion-text>Este campo es obligatorio</ion-text>
+        </div>
+
+        <ion-button expand="full" type="submit" [disabled]="!registerForm.valid">Registrar</ion-button>
+      </form>
+    </div>
+  </div>
 </ion-content>

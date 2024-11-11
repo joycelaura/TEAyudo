@@ -1,117 +1,118 @@
+/* Estructura del formulario */
 .form-container {
-  width: 100%;
-  max-width: 600px;
-  padding: 20px;
-  background-color: none;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin: 0 auto; /* Centra el formulario horizontalmente */
-}
-
-.app-container {
   display: flex;
-  flex-direction: column; /* Asegura que los elementos dentro se apilen verticalmente */
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
-  max-height: 100%; /* Ajusta la altura máxima para que se adapte al contenido */
-  overflow-y: auto; /* Agrega desplazamiento vertical si el contenido es demasiado largo */
-  background: #060c24;
+  justify-content: center;
+  padding: 20px;
 }
 
 .header-image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 300px;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .header-image {
-  max-width: 100%; /* Ajusta el ancho máximo para que la imagen sea responsive */
-  max-height: 100%; /* Ajusta la altura máxima para que la imagen sea responsive */
+  max-width: 100%;
+  height: auto;
 }
 
-
-ion-content {
-  --background: none;
-  background: #28429f;
+.form-content {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.boton_1 {
-  color: white;
-}
-
-.app-container {
-  display: flex;
-  height: 100vh;
-  background: #060c24;
-}
-
-.notificaciones{
-  color: rgb(204, 42, 42);
-  text-align: left;
+.titulo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .subtittle {
-  font-size: 20px;
-  text-align: center;
-  font-family: "Montserrat", sans-serif;
-  font-weight: bold;
-}
-
-.Titulo_1 {
-  text-align: center;
-  font-size: 40px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: bold;
+  font-size: 14px;
+  color: #000000;
   margin-bottom: 20px;
-  color: white;
 }
 
-.my-label {
-  font-size: 20px;
-  display: block; /* Esto hace que los labels se apilen verticalmente */
-  margin-bottom: 5px; /* Ajusta este valor para cambiar el espacio entre los labels */
-  color: white;
-  text-align: left;
+/* Estilo de los items */
+ion-item {
+  margin-bottom: 20px; /* Mayor separación entre los campos */
+  background-color: transparent; /* Fondo transparente en ion-item */
+  --highlight-background: transparent; /* Elimina el fondo azul cuando está enfocado */
+  --box-shadow: none; /* Elimina cualquier sombra */
 }
 
-.input {
-  display: block;
-  width: 100%;
-  height: 40px;
-  padding: 5px;
-  margin-top: 5px;
-  border-radius: 5px;
-  border: 1px solid #008dda;
-  //color: white;
-  background-color: white;
+ion-label {
+  margin-bottom: 8px;
 }
 
-form {
-  width: 100%;
-  max-width: 600px;
-  text-align: center;
-
-  ion-item {
-    --padding-start: 0;
-    --padding-end: 0;
-  }
-
-  ion-button {
-    margin-top: 20px;
-    --background: #5271ff;
-    --border-radius: 20px !important;
-    box-shadow: white;
-    --padding-start: 20px; /* Opcional: cambia el relleno izquierdo del botón */
-    --padding-end: 20px;
-  }
+ion-content{
+  display: flex;
+  --background: none;
+  background: #CDE1FF;
 }
 
-.mostrar-contrasena {
+ion-input { 
+  --box-shadow: none; /* Elimina sombra */
+  --highlight-background: ; /* Elimina fondo azul */
+  --color: #000; /* Color del texto */
+  padding-right: 45px; /* Deja espacio para el botón dentro del input */
+}
+
+/* Estilo para el botón de mostrar/ocultar contraseña */
+.mostrar-contrasena-btn {
   position: absolute;
   right: 10px;
-  transform: translateY(-15%);
-  z-index: 2;
-  color: black;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+  font-size: 14px;
+}
+
+/* Mensajes de error */
+.error-message {
+  color: red;
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.error-message ion-icon {
+  margin-right: 5px;
+}
+
+/* Botones y validación */
+.invalid ion-input {
+  border-color: red;
+}
+
+ion-button {
+  margin-top: 20px;
+}
+
+ion-button[disabled] {
+  background-color: #CDE1FF;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 10px;
+  }
+
+  .form-content {
+    width: 100%;
+  }
+
+  .titulo {
+    font-size: 20px;
+  }
+
+  .mostrar-contrasena-btn {
+    top: unset;
+    bottom: 5px;
+  }
 }

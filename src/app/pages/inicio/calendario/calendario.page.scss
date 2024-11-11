@@ -1,68 +1,102 @@
+/* Container principal del calendario */
 .calendar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .calendar-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0 10px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Estilos del encabezado del calendario */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 10px;
+}
+
+/* Estilo de la cuadrícula del calendario */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);  /* 7 columnas (una por cada día de la semana) */
+  gap: 5px;  /* Reducir el espacio entre las celdas */
+  justify-content: center;  /* Centra la cuadrícula */
+  width: 100%;  /* Ajuste para ocupar todo el ancho */
+  margin-top: 10px;
+  position: relative;  /* Para poder controlar la relación de aspecto */
+}
+
+
+/* Estilo de las filas (semanas) */
+.calendar-week {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Estilos de las celdas del calendario */
+.day-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;  /* Ajusta el contenido al inicio (arriba) */
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;  /* Línea entre las celdas */
+  box-sizing: border-box;  /* Asegura que el padding no aumente el tamaño */
+  position: relative;  /* Necesario para la relación de aspecto */
+  width: 100%;  /* Asegura que ocupe todo el ancho disponible */
+  height: 0;  /* Esto lo mantiene cuadrado */
+  padding-top: 100%;  /* Esto crea una relación de aspecto 1:1 */
+}
+/* Número del día */
+.day-number {
+  font-size: 1.2em;
+  font-weight: bold;
+  position: absolute;  /* Posicionamiento absoluto dentro del contenedor */
+  top: 20px;  /* Mueve el número hacia la parte superior */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Estilo de la imagen de emoción */
+.imagen {
+  position: absolute;  /* Posicionamiento absoluto dentro del contenedor */
+  bottom: 10px;  /* Mueve la imagen hacia la parte inferior */
+  left: 50%;
+  transform: translateX(-50%);  /* Centra la imagen horizontalmente */
+  height: 5vw; /* Ajusta el tamaño basado en el ancho de la ventana */
+  width: auto;  /* Mantiene la proporción original */
+}
+
+/* Estilo de los días de la semana */
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 10px;
+  justify-items: center;  /* Centra los encabezados de los días de la semana */
+}
+
+/* Estilos de los nombres de los días de la semana */
+.weekday {
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Estilo del calendario en pantallas pequeñas */
+@media (max-width: 768px) {
   .calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-    width: 90%;
-    margin-top: 10px;
+    grid-template-columns: repeat(7, 1fr);  /* 7 columnas */
+    /*gap: 5px;   Reducir el espacio entre las celdas */
   }
-  
-  .day {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #f0f0f0;
-    padding: 15px;
-    border-radius: 8px;
-    font-size: 1.2em;
-    height: 80px;
-    border: 1px solid #ccc;  /* Línea entre los días */
-  }
-  
-  .day-number {
-    font-weight: bold;
-  }
-  
-  .imagen {
-    width: auto;
-    height: px;  /*Mantiene la proporción original */
-  }
-  
-  /*Estilo para las celdas del calendario */
+
   .day-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ddd;  /*Agregar un borde entre las celdas */
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    height: 100px;
-  
+    padding: 5px;
+    height: 80px; /* Ajuste para pantallas pequeñas */
+    padding-top: 80%;
   }
-  
-  .day-box span {
-    font-size: 1.2em;
-    font-weight: bold;
+
+  .day-number {
+    font-size: 1em;
   }
-  
-  .day-box img {
-    margin-top: 5px;
-    width: 30px;
-    height: auto;
-  }
+}

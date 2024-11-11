@@ -10,7 +10,7 @@
 }
 
 ion-text{
-  color: white;
+  color: rgb(0, 0, 0);
 }
 .header {
     text-align: center;
@@ -29,13 +29,13 @@ ion-text{
     height: 250px;
   }
   ion-title{
-    color:white;
+    color:rgb(0, 0, 0);
   }
   p{
-    color: white;
+    color: rgb(0, 0, 0);
   }
   a{
-    color: white;
+    color: rgb(0, 0, 0);
   }
   .title {
     font-size: 2.5rem;
@@ -119,7 +119,7 @@ ion-text{
   .divider-text {
     position: absolute;
     background: #fff;
-    color: #666;
+    color: #667;
     padding: 0 10px;
     top: 50%;
     transform: translateY(-50%);

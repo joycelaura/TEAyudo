@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from 'src/app/models/user.model';
 import { Emotion } from 'src/app/models/emotion.model';
 import { ThemeService } from "src/app/services/theme.service";
+import { NativeAudio } from '@ionic-native/native-audio/ngx';
 
 @Component({
   selector: 'app-emociones',
@@ -15,7 +16,7 @@ export class EmocionesPage implements OnInit {
   emotions: Emotion[] = [];    // lista de emociones
   userEmail: string | null = null;
 
-  constructor(private firestoreSvc: FirestoreService, private auth: AngularFireAuth, private themeService: ThemeService) { }
+  constructor(private firestoreSvc: FirestoreService, private auth: AngularFireAuth, private themeService: ThemeService, private nativeAudio: NativeAudio) { }
 
   async ngOnInit() {
     this.applyStoredTheme();

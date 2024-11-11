@@ -32,12 +32,20 @@
       </ion-col>
     </ion-row>
 
-    <!-- Mostrar los días del mes -->
-    <ion-row>
-      <ion-col *ngFor="let day of days" size="3">
-        <div class="day-box">
-          <span>{{ day }}</span>
-          <img *ngIf="getDominantEmotionIcon(day)" [src]="getDominantEmotionIcon(day)" alt="Dominant Emotion" class="imagen">
+    <!-- Mostrar los días de la semana (Lunes a Domingo) -->
+    <ion-row class="weekdays">
+      <ion-col size="1" *ngFor="let day of weekDays" class="weekday">
+        <div class="day-header">{{ day }}</div>
+      </ion-col>
+    </ion-row>
+
+    <!-- Mostrar los días del mes distribuidos por semana -->
+    <ion-row *ngFor="let week of calendarDays" class="calendar-week">
+      <ion-col *ngFor="let day of week" class="calendar-day">
+        <!-- Verifica si day no es null antes de mostrar -->
+        <div class="day-box" *ngIf="day">
+          <span class="day-number">{{ day.date }}</span>
+          <img *ngIf="day.emotionIcon" [src]="day.emotionIcon" alt="Dominant Emotion" class="imagen">
         </div>
       </ion-col>
     </ion-row>
