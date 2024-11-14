@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
-import { getFirestore, setDoc, getDoc, doc } from "@angular/fire/firestore";
+import { getFirestore, setDoc, getDoc, doc, collection, query, where } from "@angular/fire/firestore";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -45,7 +45,8 @@ export class FirestoreService {
       .then((result) => {
         // Guardar el email del usuario autenticado
         user.email = result.user?.email || '';
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('userEmail', user.email); // Guarda el email en localStorage
+        console.log('Email guardado en localStorage:', user.email); // Verificación
         return result;
       })
       .catch((error) => {
@@ -53,8 +54,8 @@ export class FirestoreService {
         throw error;
       });
   }
-
-  // Registrarse
+  
+// Registrarse
   signUp(user: User) {
     return createUserWithEmailAndPassword(getAuth(), user.email, user.password)
       .then((result) => {
@@ -66,7 +67,7 @@ export class FirestoreService {
         });
       });
   }
-
+  
   // Validador si correo existe
   async emailExists(email: string): Promise<boolean> {
     const docRef = this.firestore.collection("users", (ref) =>
@@ -90,37 +91,99 @@ export class FirestoreService {
   async getDocument(path: string) {
     return (await getDoc(doc(getFirestore(), path))).data();
   }
-  
-  // Guardar o actualizar el contador de emociones en Firestore
-  async saveEmotionCount(email: string, emotion: Emotion) {
-    const emotionPath = `emotions/${email}/emotions/${emotion.name}`;
 
-    this.firestore.doc(emotionPath).set({
-      count: firebase.firestore.FieldValue.increment(1), // Incrementar el contador en 1
-      lastUpdated: new Date(),
-    }, { merge: true })
-    .then(() => {
-      console.log(`${emotion.name} count updated successfully for user ${email}`);
-    })
-    .catch((error) => {
-      console.error("Error updating emotion count:", error);
-    });
-  }
+// Guardar o actualizar el contador de emociones en Firestore
+async saveEmotionCount(email: string, emotion: string, dateKey: string) {
+  const emotionPath = `emotions/${email}/days/${dateKey}`;
+  const emotionField = `${emotion}.count`;
 
-  // Obtener los contadores de emociones desde Firestore
-  async getEmotionCount(email: string): Promise<Emotion[]> {
-    const docRef = this.firestore.collection('emotions').doc(email);
-    const docSnap = await docRef.get().toPromise();
+  await this.firestore.doc(emotionPath).set({
+    [emotionField]: firebase.firestore.FieldValue.increment(1),
+    [`${emotion}.lastUpdated`]: firebase.firestore.FieldValue.serverTimestamp(),
+  }, { merge: true })
+  .then(() => {
+    console.log(`${emotion} count updated for ${dateKey}`);
+  })
+  .catch((error) => {
+    console.error("Error updating emotion count:", error);
+  });
+}
+// Obtener los contadores de emociones desde Firestore
+async getEmotionCount(email: string): Promise<Emotion[]> {
+  const docRef = this.firestore.collection('emotions').doc(email);
+  const docSnap = await docRef.get().toPromise();
 
-    if (docSnap.exists) {
-      const emotions = docSnap.data() as { [key: string]: any };
-      return Object.keys(emotions).map(key => ({
-        name: key,
+  if (docSnap.exists) {
+    const emotions = docSnap.data() as { [key: string]: any };
+
+
+    return Object.keys(emotions).map(key => {
+      // Suponiendo que la clave es una fecha como "2024-11-01"
+      const [year, month, day] = key.split('-').map(num => parseInt(num, 10));
+
+      return {
+        email: email,      // Email del usuario
+        name: 'joy',       // Aquí puedes agregar el nombre de la emoción (por ejemplo, 'joy')
         count: emotions[key].count,
-        lastUpdated: emotions[key].lastUpdated.toDate()
-      }));
-    } else {
-      return [];
-    }
+        lastUpdated: emotions[key].lastUpdated.toDate(),
+        year: year,
+        month: month,
+        day: day
+      };
+    });
+  } else {
+    return [];
   }
+}
+// Obtener las emociones de un mes específico
+ async getEmotionsByMonth(email: string, year: number, month: number): Promise<{ [key: string]: Emotion[] }> {
+  const emotionsByDay: { [key: string]: Emotion[] } = {};
+  const startDate = new Date(year, month, 1);
+  const endDate = new Date(year, month + 1, 0);
+
+  const daysCollection = this.firestore.collection(`emotions/${email}/days`, ref =>
+    ref.where(firebase.firestore.FieldPath.documentId(), '>=', this.formatDate(startDate))
+       .where(firebase.firestore.FieldPath.documentId(), '<=', this.formatDate(endDate))
+  );
+
+  const snapshot = await daysCollection.get().toPromise();
+
+  snapshot.forEach(doc => {
+    const data = doc.data();
+    const dateKey = doc.id;
+    const emotions: Emotion[] = [];
+
+    for (const [emotionName, emotionData] of Object.entries(data)) {
+      if (emotionName.endsWith('.count')) {
+        const name = emotionName.replace('.count', '');
+        const count = data[emotionName];
+        const lastUpdated = data[`${name}.lastUpdated`]?.toDate() || new Date();
+        emotions.push({
+          name,
+          count,
+          lastUpdated,
+          email,
+          year: startDate.getFullYear(),
+          month: startDate.getMonth() + 1,
+          day: startDate.getDate(),
+        });
+      }
+    }
+
+    emotionsByDay[dateKey] = emotions;
+  });
+
+  console.log('Emociones organizadas por día:', emotionsByDay);
+  return emotionsByDay;
+}
+
+// Función auxiliar para formatear fechas
+private formatDate(date: Date): string {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+
 }

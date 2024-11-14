@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from 'src/app/models/user.model';
 import { Emotion } from 'src/app/models/emotion.model';
 import { ThemeService } from "src/app/services/theme.service";
+import { AudioService } from 'src/app/services/audio.service';
 
 @Component({
   selector: 'app-emociones',
@@ -15,7 +16,16 @@ export class EmocionesPage implements OnInit {
   emotions: Emotion[] = [];    // lista de emociones
   userEmail: string | null = null;
 
-  constructor(private firestoreSvc: FirestoreService, private auth: AngularFireAuth, private themeService: ThemeService) { }
+  private audioIra = new Audio('assets/sounds/ira.mp3');
+  private audioAlegria = new Audio('assets/sounds/alegria.mp3');
+  private audioTristeza = new Audio('assets/sounds/tristeza.mp3');
+  private audioMiedo = new Audio('assets/sounds/miedo.mp3');
+  private audioAgrado = new Audio('assets/sounds/agrado.mp3');
+  private audioVerguenza = new Audio('assets/sounds/verguenza.mp3');
+  private audioContencion = new Audio('assets/sounds/contencion.mp3');
+  private audioSoledad = new Audio('assets/sounds/soledad.mp3');
+
+  constructor(private firestoreSvc: FirestoreService, private auth: AngularFireAuth, private themeService: ThemeService, private audioService: AudioService) { }
 
   async ngOnInit() {
     this.applyStoredTheme();
@@ -35,22 +45,61 @@ export class EmocionesPage implements OnInit {
     document.body.classList.add(currentTheme);
   }
 
-  async onEmotionClick(emotionName: string) {
-    const emotion: Emotion = {
-      name: emotionName,
-      count: 1,  // Valor inicial, pero este se incrementará en Firestore
-      lastUpdated: new Date()
-    };
+  onEmotionClick(emotion: string) {
+    const email = localStorage.getItem('userEmail');
+    if (email) {
+      const today = new Date();
+      const dateKey = this.formatDate(today);
+      this.firestoreSvc.saveEmotionCount(email, emotion, dateKey);
 
-    if (this.userEmail) {
-      await this.firestoreSvc.saveEmotionCount(this.userEmail, emotion);
-      this.loadEmotionCounts();  // Recargar los contadores
+      // Reproduce el sonido correspondiente según la emoción
+      this.playEmotionSound(emotion);
     } else {
-      console.log("No user authenticated.");
+      console.log("No se encontró email en el localStorage.");
     }
   }
 
-  async loadEmotionCounts() {
+  // Método para reproducir el sonido correspondiente según la emoción
+  private playEmotionSound(emotion: string) {
+    switch (emotion) {
+      case 'ira':
+        this.audioIra.play();
+        break;
+      case 'alegria':
+        this.audioAlegria.play();
+        break;
+      case 'tristeza':
+        this.audioTristeza.play();
+        break;
+      case 'miedo':
+        this.audioMiedo.play();
+        break;
+      case 'agrado':
+        this.audioAgrado.play();
+        break;
+      case 'verguenza':
+        this.audioVerguenza.play();
+        break;
+      case 'contencion':
+        this.audioContencion.play();
+        break;
+      case 'soledad':
+        this.audioSoledad.play();
+        break;
+      default:
+        console.error('Emoción no reconocida:', emotion);
+        break;
+    }
+  }
+
+  // Función auxiliar para formatear fechas
+  private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+async loadEmotionCounts() {
     if (this.userEmail) {
       this.emotions = await this.firestoreSvc.getEmotionCount(this.userEmail);
       console.log("Emotions loaded:", this.emotions);

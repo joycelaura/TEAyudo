@@ -35,16 +35,3 @@ ion-button {
   color: var(--ion-button-text-color); /* Color del texto según el tema */
 }
 
-/* Estilo específico para el tema claro */
-body.light-theme {
-  --ion-background-color: #CDE1FF; /* Fondo en tema claro */
-  --ion-button-background: #007bff; /* Color del botón en tema claro */
-  --ion-button-text-color: #ffffff; /* Texto del botón en tema claro */
-}
-
-/* Estilo específico para el tema oscuro */
-body.dark-theme {
-  --ion-background-color: #1e1e1e; /* Fondo en tema oscuro */
-  --ion-button-background: #ea3a3a; /* Color del botón en tema oscuro */
-  --ion-button-text-color: #ffffff; /* Texto del botón en tema oscuro */
-}

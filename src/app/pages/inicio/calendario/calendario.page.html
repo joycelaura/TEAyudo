@@ -7,8 +7,47 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div class="calendar">
-    <!-- calendario -->
-  </div>
+<ion-content>
+  <ion-grid>
+    <!-- Selector de mes -->
+    <ion-row>
+      <ion-col size="6">
+        <ion-select [(ngModel)]="currentMonth" (ionChange)="updateCalendar()" interface="popover">
+          <ion-select-option *ngFor="let month of monthNames; let i = index" [value]="i">{{ month }}</ion-select-option>
+        </ion-select>
+      </ion-col>
+
+      <!-- Selector de año -->
+      <ion-col size="6">
+        <ion-select [(ngModel)]="currentYear" (ionChange)="updateCalendar()" interface="popover">
+          <ion-select-option *ngFor="let year of yearRange" [value]="year">{{ year }}</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+
+    <!-- Mostrar el mes y el año seleccionados -->
+    <ion-row>
+      <ion-col size="12">
+        <ion-title>{{ monthNames[currentMonth] }} {{ currentYear }}</ion-title>
+      </ion-col>
+    </ion-row>
+
+    <!-- Mostrar los días de la semana (Lunes a Domingo) -->
+    <ion-row class="weekdays">
+      <ion-col size="1" *ngFor="let day of weekDays" class="weekday">
+        <div class="day-header">{{ day }}</div>
+      </ion-col>
+    </ion-row>
+
+    <!-- Mostrar los días del mes distribuidos por semana -->
+    <ion-row *ngFor="let week of calendarDays" class="calendar-week">
+      <ion-col *ngFor="let day of week" class="calendar-day">
+        <!-- Verifica si day no es null antes de mostrar -->
+        <div class="day-box" *ngIf="day">
+          <span class="day-number">{{ day.date }}</span>
+          <img *ngIf="day.emotionIcon" [src]="day.emotionIcon" alt="Dominant Emotion" class="imagen">
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
