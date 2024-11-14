@@ -76,10 +76,5 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.2.2"
   },
-  "description": "An Ionic project",
-  "cordova": {
-    "plugins": {
-      "cordova-plugin-nativeaudio": {}
-    }
-  }
+  "description": "An Ionic project"
 }

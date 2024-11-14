@@ -12,7 +12,6 @@ import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 import { environment } from "src/environments/environment";
 import { SharedModule } from "./shared/shared.module";
 import { IonicStorageModule } from "@ionic/storage-angular";
-import { NativeAudio } from "@ionic-native/native-audio/ngx";
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -25,7 +24,7 @@ import { NativeAudio } from "@ionic-native/native-audio/ngx";
     SharedModule,
     IonicStorageModule.forRoot(),
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, NativeAudio],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
