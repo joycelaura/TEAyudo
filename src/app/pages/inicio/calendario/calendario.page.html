@@ -35,7 +35,7 @@
 
     <!-- Mostrar los días de la semana -->
     <ion-row>
-      <ion-col *ngFor="let day of weekDays" size="1">
+      <ion-col *ngFor="let day of weekDays" size="1.7">
         <div class="day-header">
           <span>{{ day }}</span>
         </div>
@@ -44,7 +44,7 @@
 
     <!-- Mostrar los días del mes organizados por semanas -->
     <ion-row *ngFor="let week of calendarDays">
-      <ion-col *ngFor="let day of week" size="1">
+      <ion-col *ngFor="let day of week" size="1.7">
         <div *ngIf="day" class="day-box">
           <span>{{ day }}</span>
           <img *ngIf="getDominantEmotionIcon(day)" [src]="getDominantEmotionIcon(day)" alt="Dominant Emotion" class="imagen">
