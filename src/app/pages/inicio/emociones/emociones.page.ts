@@ -16,6 +16,7 @@ export class EmocionesPage implements OnInit {
   userEmail: string | null = null;
 
   // Define los archivos de sonido para cada emoción
+
   private audioIra = new Audio('assets/sounds/ira.mp3');
   private audioAlegria = new Audio('assets/sounds/alegria.mp3');
   private audioTristeza = new Audio('assets/sounds/tristeza.mp3');
@@ -25,12 +26,14 @@ export class EmocionesPage implements OnInit {
   private audioContencion = new Audio('assets/sounds/contencion.mp3');
   private audioSoledad = new Audio('assets/sounds/soledad.mp3');
 
+
   constructor(
     private firestoreSvc: FirestoreService, 
     private auth: AngularFireAuth, 
     private themeService: ThemeService, 
     private audioService: AudioService
   ) { }
+
 
   async ngOnInit() {
     this.applyStoredTheme();

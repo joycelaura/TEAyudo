@@ -1,8 +1,12 @@
+/* Container principal del calendario */
 .calendar-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+
+/* Estilos del encabezado del calendario */
 
 .calendar-header {
   display: flex;
@@ -11,6 +15,7 @@
   width: 100%;
   padding: 0 10px;
 }
+
 
 .calendar-grid {
   display: grid;
@@ -27,10 +32,12 @@
   padding: 5px 0;
 }
 
+
 .day-box {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   justify-content: center;
   border: 1px solid #ddd;
   padding: 10px;
@@ -114,5 +121,6 @@
   }
   .day-box span {
     font-size: 0.8em; /* Reducir el tamaño de la fuente aún más */
+
   }
 }

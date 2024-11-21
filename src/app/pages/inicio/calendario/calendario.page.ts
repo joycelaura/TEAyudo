@@ -53,7 +53,9 @@ export class CalendarioPage implements OnInit, AfterViewInit {
   monthEmotions: { [key: string]: Emotion[] } = {};
 
   weekDays: string[] = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];  // Días de la semana
+
   calendarDays: any[] = [];  // Arreglo para organizar los días en semanas
+
   monthNames: string[] = [
     'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
     'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
@@ -99,7 +101,10 @@ export class CalendarioPage implements OnInit, AfterViewInit {
       this.chart.update();
     }
   }
-
+  async applyStoredTheme() {
+    const currentTheme = this.themeService.getCurrentTheme();
+    document.body.classList.add(currentTheme);
+  }
   // Generar un rango de años para el selector de años
   generateYearRange() {
     const currentYear = new Date().getFullYear();
@@ -114,6 +119,7 @@ export class CalendarioPage implements OnInit, AfterViewInit {
   // Generar el calendario basado en el mes y año seleccionados
   // Generar el calendario basado en el mes y año seleccionados
   async generateCalendar() {
+
     const daysInMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate(); // Total de días en el mes
     const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1).getDay(); // Día de la semana del primer día del mes
   
@@ -135,12 +141,37 @@ export class CalendarioPage implements OnInit, AfterViewInit {
       this.calendarDays.push(daysArray.splice(0, 7)); // Divide en semanas (7 días por semana)
     }
   
+
     const email = localStorage.getItem('userEmail');
     if (email) {
       this.monthEmotions = await this.firestoreSvc.getEmotionsByMonth(email, this.currentYear, this.currentMonth);
+      console.log("Emotions loaded from Firestore:", this.monthEmotions);  // Log para verificar
+    }
+
+    // Agregar los días del mes y las emociones
+    for (let i = 1; i <= daysInMonth; i++) {
+      const currentDay = new Date(this.currentYear, this.currentMonth, i);
+      const dayIndex = currentDay.getDay();  // Día de la semana de este día
+
+      // Agregar el día y el ícono de la emoción dominante
+      week.push({ date: i, emotionIcon: await this.getDominantEmotionIcon(i) });
+
+      // Si la semana está llena (7 días), agregarla al calendario y comenzar una nueva semana
+      if (week.length === 7) {
+        this.calendarDays.push(week);
+        week = [];
+      }
+    }
+
+    // Si la última semana no está completa, agregarla
+    if (week.length > 0) {
+      // Completar la última semana con null hasta 7 días si es necesario
+      while (week.length < 7) {
+        week.push(null);
+      }
+      this.calendarDays.push(week);
     }
   }
-  
   
 
   getDominantEmotionIcon(day: number): string | null {
@@ -197,4 +228,5 @@ prevMonth() {
   }
   this.generateCalendar();
 }
+
 }

@@ -34,6 +34,16 @@
     </ion-item>
 
     <ion-item lines="none" class="ion-margin-top custom-item">
+      <ion-label position="floating">Teléfono Tutor:</ion-label>
+      <ion-input
+        #telefonoInput
+        type="tel"
+        [readonly]="!isEditable"
+        [(ngModel)]="telefono"
+      ></ion-input>
+    </ion-item>
+    
+    <ion-item lines="none" class="ion-margin-top custom-item">
       <ion-input
         label="Correo Electrónico: "
         type="email"

@@ -16,7 +16,7 @@ export class ProfilePage implements OnInit {
   @ViewChild("nombreInput") nombreInput: IonInput | undefined;
   @ViewChild("contrasenaInput") contrasenaInput: IonInput | undefined;
   @ViewChild("correoInput") correoInput: IonInput | undefined;
-
+  @ViewChild("telefonoInput") telefonoInput: IonInput | undefined;
 
   router = inject(Router);
   firebaseSvc = inject(FirestoreService);
@@ -24,6 +24,7 @@ export class ProfilePage implements OnInit {
   nombre: string = "";
   password: string = "";
   correo: string = "";
+  telefono: string = "";
   //isEditable = true;
 
   isEditable = false;
@@ -46,6 +47,7 @@ export class ProfilePage implements OnInit {
             this.nombre = userData.nombre;
             this.password = userData.password;
             this.correo = userData.email;
+            this.telefono = userData.telefono || '';
           });
       }
     });
