@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Chart, ChartData, ChartOptions,  } from 'chart.js';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Emotion } from 'src/app/models/emotion.model';
 import { ThemeService } from "src/app/services/theme.service";
@@ -8,21 +9,55 @@ import { ThemeService } from "src/app/services/theme.service";
   templateUrl: './calendario.page.html',
   styleUrls: ['./calendario.page.scss'],
 })
-export class CalendarioPage implements OnInit {
+export class CalendarioPage implements OnInit, AfterViewInit {
+
+  @ViewChild('emotionChart') emotionChart: any; // Referencia al canvas
+  chart: any; // Referencia a la instancia del gráfico
+
+  // Datos y opciones de la gráfica
+  chartData: ChartData<'bar'> = {
+    labels: [], // Etiquetas de las emociones
+    datasets: [{
+      data: [], // Datos de las emociones
+      label: 'Emociones',
+      backgroundColor: '#42A5F5', // Color de las barras
+      borderColor: '#1E88E5', // Color del borde de las barras
+      borderWidth: 1,
+    }],
+  };
+
+  chartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false, // Asegura que no se mantenga la relación de aspecto
+    scales: {
+      x: {
+        beginAtZero: true,
+      },
+      y: {
+        beginAtZero: true,
+      },
+    },
+    // Opcional: establecer un tamaño específico
+    plugins: {
+      legend: {
+        position: 'top',
+      }
+    }
+  };
+  
+
+
   days: number[] = [];
   currentMonth: number = new Date().getMonth();  // Inicializar con el mes actual
   currentYear: number = new Date().getFullYear();  // Inicializar con el año actual
   monthEmotions: { [key: string]: Emotion[] } = {};
 
   weekDays: string[] = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];  // Días de la semana
-
   calendarDays: any[] = [];  // Arreglo para organizar los días en semanas
-
   monthNames: string[] = [
     'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
     'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
   ];
-
   yearRange: number[] = [];
 
   constructor(private firestoreSvc: FirestoreService, private themeService: ThemeService) {}
@@ -30,11 +65,41 @@ export class CalendarioPage implements OnInit {
   ngOnInit() {
     this.generateYearRange();  // Generar el rango de años
     this.generateCalendar();    // Generar el calendario con el mes y año actuales
+    this.generateEmotionStats(); // Generar las estadísticas emocionales
   }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.initChart(); // Inicializa el gráfico después de un breve retraso
+    }, 0);
+  }
+
   async applyStoredTheme() {
     const currentTheme = this.themeService.getCurrentTheme();
     document.body.classList.add(currentTheme);
   }
+
+  // Inicializar el gráfico
+  initChart() {
+    const chartCanvas = this.emotionChart.nativeElement;
+    if (chartCanvas) {
+      this.chart = new Chart(chartCanvas, {
+        type: 'bar',
+        data: this.chartData,
+        options: this.chartOptions,
+      });
+    }
+  }
+  
+
+  // Actualizar la gráfica cuando cambian los datos
+  updateChart() {
+    if (this.chart) {
+      this.chart.data = this.chartData;
+      this.chart.update();
+    }
+  }
+
   // Generar un rango de años para el selector de años
   generateYearRange() {
     const currentYear = new Date().getFullYear();
@@ -47,94 +112,89 @@ export class CalendarioPage implements OnInit {
   }
 
   // Generar el calendario basado en el mes y año seleccionados
+  // Generar el calendario basado en el mes y año seleccionados
   async generateCalendar() {
-    const daysInMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
-    const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1);
-    let firstDayIndex = firstDayOfMonth.getDay(); // Día de la semana del primer día del mes
-
-    // Ajustar para que el primer día de la semana comience en lunes (si es necesario)
-    firstDayIndex = (firstDayIndex === 0) ? 6 : firstDayIndex - 1; // Ajuste si el primer día es domingo
-
-    this.days = Array.from({ length: daysInMonth }, (_, i) => i + 1);  // Crear array con los días del mes
-
-    this.calendarDays = [];  // Resetear la lista de semanas
-
-    let week: any[] = [];  // Semana actual
-
-    // Rellenar los días previos al primer día del mes con null
-    for (let i = 0; i < firstDayIndex; i++) {
-      week.push(null);  // Rellenar los días anteriores al primer día del mes
+    const daysInMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate(); // Total de días en el mes
+    const firstDayOfMonth = new Date(this.currentYear, this.currentMonth, 1).getDay(); // Día de la semana del primer día del mes
+  
+    // Ajustar el primer día para que la semana comience en lunes
+    const firstDayAdjusted = firstDayOfMonth === 0 ? 6 : firstDayOfMonth - 1; // Si es domingo (0), ajustamos a 6 (sábado)
+  
+    // Crear un array de días con días vacíos al inicio según el primer día de la semana
+    const daysArray = [];
+    for (let i = 0; i < firstDayAdjusted; i++) {
+      daysArray.push(null); // Rellenamos con null para los días vacíos antes del 1 del mes
     }
-
-    // Obtener emociones del usuario (si las hay)
+    for (let day = 1; day <= daysInMonth; day++) {
+      daysArray.push(day); // Agregar los días del mes
+    }
+  
+    // Dividir los días en semanas (array de arrays)
+    this.calendarDays = [];
+    while (daysArray.length) {
+      this.calendarDays.push(daysArray.splice(0, 7)); // Divide en semanas (7 días por semana)
+    }
+  
     const email = localStorage.getItem('userEmail');
     if (email) {
       this.monthEmotions = await this.firestoreSvc.getEmotionsByMonth(email, this.currentYear, this.currentMonth);
-      console.log("Emotions loaded from Firestore:", this.monthEmotions);  // Log para verificar
-    }
-
-    // Agregar los días del mes y las emociones
-    for (let i = 1; i <= daysInMonth; i++) {
-      const currentDay = new Date(this.currentYear, this.currentMonth, i);
-      const dayIndex = currentDay.getDay();  // Día de la semana de este día
-
-      // Agregar el día y el ícono de la emoción dominante
-      week.push({ date: i, emotionIcon: await this.getDominantEmotionIcon(i) });
-
-      // Si la semana está llena (7 días), agregarla al calendario y comenzar una nueva semana
-      if (week.length === 7) {
-        this.calendarDays.push(week);
-        week = [];
-      }
-    }
-
-    // Si la última semana no está completa, agregarla
-    if (week.length > 0) {
-      // Completar la última semana con null hasta 7 días si es necesario
-      while (week.length < 7) {
-        week.push(null);
-      }
-      this.calendarDays.push(week);
     }
   }
+  
+  
 
-  // Obtener el ícono de la emoción dominante para un día específico
-  async getDominantEmotionIcon(day: number): Promise<string|null> {
+  getDominantEmotionIcon(day: number): string | null {
     const dateKey = `${this.currentYear}-${(this.currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
     const emotions = this.monthEmotions[dateKey];
 
-    console.log(`Emotions for ${dateKey}:`, emotions);  // Log para verificar las emociones
-
     if (emotions && emotions.length > 0) {
       const dominantEmotion = emotions.reduce((prev, current) => (prev.count > current.count) ? prev : current);
-      console.log(`Dominant emotion for ${dateKey}:`, dominantEmotion);  // Log para la emoción dominante
       return `assets/svg_emo/${dominantEmotion.name}.svg`;
     }
-
-    console.log(`No emotions for ${dateKey}`);  // Log si no hay emociones
     return null;
   }
 
-  // Actualizar el calendario cuando el usuario cambia mes o año
-  updateCalendar() {
-    this.generateCalendar();
-  }
+  async generateEmotionStats() {
+    const emotionCounts: { [key: string]: number } = {};
 
-  // Navegar al siguiente mes
-  nextMonth() {
-    this.currentMonth = (this.currentMonth + 1) % 12;
-    if (this.currentMonth === 0) {
-      this.currentYear += 1;
+    for (const dateKey in this.monthEmotions) {
+      const emotions = this.monthEmotions[dateKey];
+      if (emotions) {
+        emotions.forEach(emotion => {
+          emotionCounts[emotion.name] = (emotionCounts[emotion.name] || 0) + 1;
+        });
+      }
     }
-    this.generateCalendar();
-  }
 
-  // Navegar al mes anterior
-  prevMonth() {
-    this.currentMonth = (this.currentMonth - 1 + 12) % 12;
-    if (this.currentMonth === 11) {
-      this.currentYear -= 1;
-    }
-    this.generateCalendar();
+    const emotions = Object.keys(emotionCounts);
+    const counts = emotions.map(emotion => emotionCounts[emotion]);
+
+    this.chartData.labels = emotions;
+    this.chartData.datasets[0].data = counts;
+
+    this.updateChart(); // Actualizar el gráfico con los nuevos datos
   }
+  
+// Actualizar el calendario cuando el usuario cambia mes o año
+updateCalendar() {
+  this.generateCalendar();
+}
+
+// Navegar al siguiente mes
+nextMonth() {
+  this.currentMonth = (this.currentMonth + 1) % 12;
+  if (this.currentMonth === 0) {
+    this.currentYear += 1;
+  }
+  this.generateCalendar();
+}
+
+// Navegar al mes anterior
+prevMonth() {
+  this.currentMonth = (this.currentMonth - 1 + 12) % 12;
+  if (this.currentMonth === 11) {
+    this.currentYear -= 1;
+  }
+  this.generateCalendar();
+}
 }
