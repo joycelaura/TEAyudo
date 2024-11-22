@@ -1,8 +1,12 @@
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { Chart, ChartData, ChartOptions,  } from 'chart.js';
+import { Chart, ChartData, ChartOptions, registerables  } from 'chart.js';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Emotion } from 'src/app/models/emotion.model';
 import { ThemeService } from "src/app/services/theme.service";
+
+
+
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-calendario',
@@ -70,26 +74,57 @@ export class CalendarioPage implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.initChart(); // Inicializa el gráfico después de un breve retraso
+      if (this.monthEmotions) {
+        this.initChart(); // Inicializa el gráfico solo si ya hay datos de emociones
+      }
     }, 0);
   }
+  
 
   async applyStoredTheme() {
     const currentTheme = this.themeService.getCurrentTheme();
     document.body.classList.add(currentTheme);
   }
-
-  // Inicializar el gráfico
-  initChart() {
-    const chartCanvas = this.emotionChart.nativeElement;
-    if (chartCanvas) {
-      this.chart = new Chart(chartCanvas, {
+  
+    initChart() {
+      if (this.chart) {
+        this.chart.destroy(); // Destruye la gráfica previa si existe
+      }
+    
+      this.chart = new Chart(this.emotionChart.nativeElement, {
         type: 'bar',
-        data: this.chartData,
-        options: this.chartOptions,
+        data: {
+          labels: this.chartData.labels, // Etiquetas
+          datasets: [
+            {
+              label: 'Emociones',
+              data: this.chartData.datasets[0].data, // Valores
+              backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // Colores de barras
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              type: 'category', // Asegúrate de registrar esta escala
+              title: {
+                display: true,
+                text: 'Emociones',
+              },
+            },
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Conteo',
+              },
+            },
+          },
+        },
       });
     }
-  }
+    
   
 
   // Actualizar la gráfica cuando cambian los datos
@@ -111,7 +146,6 @@ export class CalendarioPage implements OnInit, AfterViewInit {
     }
   }
 
-  // Generar el calendario basado en el mes y año seleccionados
   // Generar el calendario basado en el mes y año seleccionados
   async generateCalendar() {
     const daysInMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate(); // Total de días en el mes
@@ -138,6 +172,7 @@ export class CalendarioPage implements OnInit, AfterViewInit {
     const email = localStorage.getItem('userEmail');
     if (email) {
       this.monthEmotions = await this.firestoreSvc.getEmotionsByMonth(email, this.currentYear, this.currentMonth);
+      console.log('Emociones del mes:', this.monthEmotions);  // Verifica aquí que se obtienen emociones
     }
   }
   
@@ -156,23 +191,32 @@ export class CalendarioPage implements OnInit, AfterViewInit {
 
   async generateEmotionStats() {
     const emotionCounts: { [key: string]: number } = {};
-
+  
+    // Iterar sobre cada día
     for (const dateKey in this.monthEmotions) {
-      const emotions = this.monthEmotions[dateKey];
-      if (emotions) {
-        emotions.forEach(emotion => {
-          emotionCounts[emotion.name] = (emotionCounts[emotion.name] || 0) + 1;
+      const emotions = this.monthEmotions[dateKey]; // Array de emociones para esa fecha
+      if (emotions && Array.isArray(emotions)) {
+        emotions.forEach((emotion: any) => {
+          const emotionName = emotion.name; // Asegúrate de que este campo exista
+          if (emotionName) {
+            emotionCounts[emotionName] = (emotionCounts[emotionName] || 0) + 1;
+          }
         });
       }
     }
-
-    const emotions = Object.keys(emotionCounts);
-    const counts = emotions.map(emotion => emotionCounts[emotion]);
-
-    this.chartData.labels = emotions;
-    this.chartData.datasets[0].data = counts;
-
-    this.updateChart(); // Actualizar el gráfico con los nuevos datos
+  
+    console.log('Conteo de emociones:', emotionCounts);
+  
+    if (Object.keys(emotionCounts).length === 0) {
+      console.warn('No hay datos para mostrar en el gráfico.');
+      return;
+    }
+  
+    // Actualiza los datos de la gráfica
+    this.chartData.labels = Object.keys(emotionCounts);
+    this.chartData.datasets[0].data = Object.values(emotionCounts);
+  
+    this.updateChart(); // Forzar actualización del gráfico
   }
   
 // Actualizar el calendario cuando el usuario cambia mes o año
