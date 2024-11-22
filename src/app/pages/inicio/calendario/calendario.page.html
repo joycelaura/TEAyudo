@@ -32,14 +32,39 @@
       </ion-col>
     </ion-row>
 
-    <!-- Mostrar los días del mes -->
+
+    <!-- Mostrar los días de la semana -->
     <ion-row>
-      <ion-col *ngFor="let day of days" size="3">
-        <div class="day-box">
+      <ion-col *ngFor="let day of weekDays" size="1.7">
+        <div class="day-header">
+          <span>{{ day }}</span>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- Mostrar los días del mes organizados por semanas -->
+    <ion-row *ngFor="let week of calendarDays">
+      <ion-col *ngFor="let day of week" size="1.7">
+        <div *ngIf="day" class="day-box">
           <span>{{ day }}</span>
           <img *ngIf="getDominantEmotionIcon(day)" [src]="getDominantEmotionIcon(day)" alt="Dominant Emotion" class="imagen">
+
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- Sección del gráfico -->
+    <ion-row>
+      <ion-col size="12">
+        <h3>Estadísticas de Emociones</h3>
+        <div class="chart-container">
+          <canvas #emotionChart></canvas>
+        </div>
+        <div *ngIf="chartData.labels.length === 0" class="no-data">
+          <p>No hay suficientes datos para mostrar el gráfico.</p>
         </div>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
+<app-tabs style="z-index: 1"></app-tabs>
