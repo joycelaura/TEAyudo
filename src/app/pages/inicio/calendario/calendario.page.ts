@@ -3,10 +3,12 @@ export let monthEmotions: { [key: string]: Emotion[] } = {};
 
 // Importaciones
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { Chart, ChartData, ChartOptions } from 'chart.js';
+import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Emotion } from 'src/app/models/emotion.model';
 import { ThemeService } from "src/app/services/theme.service";
+
+Chart.register(...registerables);
 
 @Component({
   selector: 'app-calendario',
@@ -81,16 +83,43 @@ export class CalendarioPage implements OnInit, AfterViewInit {
 
   // Inicializar el gráfico
   initChart() {
-    const chartCanvas = this.emotionChart.nativeElement;
-    if (chartCanvas) {
-      this.chart = new Chart(chartCanvas, {
-        type: 'bar',
-        data: this.chartData,
-        options: this.chartOptions,
-      });
+    if (this.chart) {
+      this.chart.destroy(); // Destruye la gráfica previa si existe
     }
+
+    this.chart = new Chart(this.emotionChart.nativeElement, {
+      type: 'bar',
+      data: {
+        labels: this.chartData.labels, // Etiquetas
+        datasets: [
+          {
+            label: 'Emociones',
+            data: this.chartData.datasets[0].data, // Valores
+            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'], // Colores de barras
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            type: 'category', // Asegúrate de registrar esta escala
+            title: {
+              display: true,
+              text: 'Emociones',
+            },
+          },
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Conteo',
+            },
+          },
+        },
+      },
+    });
   }
-  
 
   // Actualizar la gráfica cuando cambian los datos
   updateChart() {
