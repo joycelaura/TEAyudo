@@ -134,39 +134,55 @@ export class CalendarioPage implements OnInit, AfterViewInit {
     const email = localStorage.getItem('userEmail');
     if (email) {
       monthEmotions = await this.firestoreSvc.getEmotionsByMonth(email, this.currentYear, this.currentMonth);
+      console.log('Datos cargados en monthEmotions:', monthEmotions); // Depuración
+      await this.generateEmotionStats();
     }
   }
 
   getDominantEmotionIcon(day: number): string | null {
     const dateKey = `${this.currentYear}-${(this.currentMonth + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
     const emotions = monthEmotions[dateKey];
-
+  
     if (emotions && emotions.length > 0) {
       const dominantEmotion = emotions.reduce((prev, current) => (prev.count > current.count) ? prev : current);
       return `assets/svg_emo/${dominantEmotion.name}.svg`;
     }
     return null;
   }
-
+  
+  // Generar estadísticas emocionales y actualizar el gráfico
   async generateEmotionStats() {
-    const emotionCounts: { [key: string]: number } = {};
-    console.log(monthEmotions);
-    for (const dateKey in monthEmotions) {
-      const emotions = monthEmotions[dateKey];
-      if (emotions) {
+    console.log('monthEmotions:', monthEmotions);
+
+    try {
+      const email = localStorage.getItem('userEmail');
+      if (!email) {
+        console.error('Email not found in localStorage.');
+        return;
+      }
+
+      const emotionCounts: { [key: string]: number } = {};
+
+      for (const dateKey in monthEmotions) {
+        const emotions = monthEmotions[dateKey];
         emotions.forEach(emotion => {
-          emotionCounts[emotion.name] = (emotionCounts[emotion.name] || 0) + 1;
+          emotionCounts[emotion.name] = (emotionCounts[emotion.name] || 0) + emotion.count;
         });
       }
+
+      // Crear etiquetas y datos para el gráfico
+      const emotions = Object.keys(emotionCounts);
+      const counts = emotions.map(emotion => emotionCounts[emotion]);
+
+      // Asignar datos al gráfico
+      this.chartData.labels = emotions;
+      this.chartData.datasets[0].data = counts;
+
+      console.log('Datos para el gráfico:', this.chartData);
+      this.updateChart();
+    } catch (error) {
+      console.error('Error generating emotion stats:', error);
     }
-
-    const emotions = Object.keys(emotionCounts);
-    const counts = emotions.map(emotion => emotionCounts[emotion]);
-
-    this.chartData.labels = emotions;
-    this.chartData.datasets[0].data = counts;
-
-    this.updateChart(); // Actualizar el gráfico con los nuevos datos
   }
   
 // Actualizar el calendario cuando el usuario cambia mes o año
