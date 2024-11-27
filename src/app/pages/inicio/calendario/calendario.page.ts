@@ -3,9 +3,6 @@ export let monthEmotions: { [key: string]: Emotion[] } = {};
 
 // Importaciones
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-<<<<<<< HEAD
-import { Chart, ChartData, ChartOptions, registerables  } from 'chart.js';
-=======
 import { Chart, ChartData, ChartOptions } from 'chart.js';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Emotion } from 'src/app/models/emotion.model';
