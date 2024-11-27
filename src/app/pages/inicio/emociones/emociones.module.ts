@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { EmocionesPageRoutingModule } from './emociones-routing.module';
 
 import { EmocionesPage } from './emociones.page';
-import { SharedModule } from "../../../shared/shared.module";
 
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +16,7 @@ import { SharedModule } from "../../../shared/shared.module";
     IonicModule,
     EmocionesPageRoutingModule,
     SharedModule
-],
+  ],
   declarations: [EmocionesPage]
 })
 export class EmocionesPageModule {}

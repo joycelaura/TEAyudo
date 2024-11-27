@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { CalendarioPageRoutingModule } from './calendario-routing.module';
 
 import { CalendarioPage } from './calendario.page';
-import { SharedModule } from "../../../shared/shared.module";
+
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { SharedModule } from "../../../shared/shared.module";
     IonicModule,
     CalendarioPageRoutingModule,
     SharedModule
-],
+
+  ],
   declarations: [CalendarioPage]
 })
 export class CalendarioPageModule {}

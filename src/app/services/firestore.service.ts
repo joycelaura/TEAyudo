@@ -136,7 +136,7 @@ async getEmotionCount(email: string): Promise<Emotion[]> {
   }
 }
 // Obtener las emociones de un mes específico
- async getEmotionsByMonth(email: string, year: number, month: number): Promise<{ [key: string]: Emotion[] }> {
+async getEmotionsByMonth(email: string, year: number, month: number): Promise<{ [key: string]: Emotion[] }> {
   const emotionsByDay: { [key: string]: Emotion[] } = {};
   const startDate = new Date(year, month, 1);
   const endDate = new Date(year, month + 1, 0);
@@ -148,32 +148,36 @@ async getEmotionCount(email: string): Promise<Emotion[]> {
 
   const snapshot = await daysCollection.get().toPromise();
 
-  snapshot.forEach(doc => {
-    const data = doc.data();
-    const dateKey = doc.id;
-    const emotions: Emotion[] = [];
+  if (!snapshot.empty) {
+    snapshot.forEach(doc => {
+      const data = doc.data();
+      const dateKey = doc.id;
+      const emotions: Emotion[] = [];
 
-    for (const [emotionName, emotionData] of Object.entries(data)) {
-      if (emotionName.endsWith('.count')) {
-        const name = emotionName.replace('.count', '');
-        const count = data[emotionName];
-        const lastUpdated = data[`${name}.lastUpdated`]?.toDate() || new Date();
-        emotions.push({
-          name,
-          count,
-          lastUpdated,
-          email,
-          year: startDate.getFullYear(),
-          month: startDate.getMonth() + 1,
-          day: startDate.getDate(),
-        });
+      for (const [key, value] of Object.entries(data)) {
+        if (key.endsWith('.count')) {
+          const emotionName = key.replace('.count', '');
+          emotions.push({
+            name: emotionName,
+            count: value as number,
+            lastUpdated: data[`${emotionName}.lastUpdated`]?.toDate() || new Date(),
+            email,
+            year,
+            month: month + 1,
+            day: parseInt(dateKey.split('-')[2]), // Extraer día del id
+          });
+        }
       }
-    }
 
-    emotionsByDay[dateKey] = emotions;
-  });
+      if (emotions.length > 0) {
+        emotionsByDay[dateKey] = emotions;
+      }
+    });
+  } else {
+    console.warn('No emotions found for the selected range');
+  }
 
-  console.log('Emociones organizadas por día:', emotionsByDay);
+  console.log('Emociones organizadas por día:', emotionsByDay); // Log para depuración
   return emotionsByDay;
 }
 
