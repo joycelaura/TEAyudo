@@ -12,6 +12,7 @@ import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 import { environment } from "src/environments/environment";
 import { SharedModule } from "./shared/shared.module";
 import { IonicStorageModule } from "@ionic/storage-angular";
+
 @NgModule({
   declarations: [AppComponent],
   imports: [

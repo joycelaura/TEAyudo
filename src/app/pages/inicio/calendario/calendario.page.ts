@@ -7,6 +7,8 @@ import { Chart, ChartData, ChartOptions, registerables } from 'chart.js';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { Emotion } from 'src/app/models/emotion.model';
 import { ThemeService } from "src/app/services/theme.service";
+import { ModalController } from '@ionic/angular';
+
 
 Chart.register(...registerables);
 
@@ -16,6 +18,9 @@ Chart.register(...registerables);
   styleUrls: ['./calendario.page.scss'],
 })
 export class CalendarioPage implements OnInit, AfterViewInit {
+  advice: string | null = null;
+  mostFrequentEmotion: string | null = null;
+  selectedTheme: string;
 
   @ViewChild('emotionChart') emotionChart: any; // Referencia al canvas
   chart: any; // Referencia a la instancia del gráfico
@@ -62,9 +67,14 @@ export class CalendarioPage implements OnInit, AfterViewInit {
   ];
   yearRange: number[] = [];
 
-  constructor(private firestoreSvc: FirestoreService, private themeService: ThemeService) {}
-
+  constructor(private firestoreSvc: FirestoreService, private themeService: ThemeService, private modalController:ModalController) {
+    this.selectedTheme = this.themeService.getCurrentTheme();
+  }
+  onThemeChange() {
+    this.themeService.setTheme(this.selectedTheme);
+  }
   ngOnInit() {
+    this.applyStoredTheme();
     this.generateYearRange();  // Generar el rango de años
     this.generateCalendar();    // Generar el calendario con el mes y año actuales
     this.generateEmotionStats(); // Generar las estadísticas emocionales
@@ -209,11 +219,48 @@ export class CalendarioPage implements OnInit, AfterViewInit {
 
       console.log('Datos para el gráfico:', this.chartData);
       this.updateChart();
+
+      // Calcular la emoción más frecuente
+      this.mostFrequentEmotion = this.getMostFrequentEmotion(emotionCounts);
+      console.log('Emoción más frecuente:', this.mostFrequentEmotion);
+
+      // Obtener el consejo basado en la emoción más frecuente
+      this.advice = this.getAdviceForEmotion(this.mostFrequentEmotion);
+
     } catch (error) {
       console.error('Error generating emotion stats:', error);
     }
   }
-  
+
+// Función para calcular la emoción más frecuente
+  getMostFrequentEmotion(emotionCounts: { [key: string]: number }): string {
+    return Object.keys(emotionCounts).reduce((a, b) => emotionCounts[a] > emotionCounts[b] ? a : b);
+  }  
+
+  // Función para obtener el consejo según la emoción más frecuente
+  getAdviceForEmotion(emotion: string | null): string {
+    switch (emotion) {
+      case 'ira':
+        return 'Tómate un tiempo para calmarte y reflexionar.';
+      case 'alegria':
+        return 'Comparte tu alegría con los demás.';
+      case 'tristeza':
+        return 'Habla con alguien de confianza.';
+      case 'miedo':
+        return 'Haz una pausa y respira profundo.';
+      case 'agrado':
+        return 'Aprovecha este buen momento.';
+      case 'verguenza':
+        return 'Recuerda que todos cometemos errores.';
+      case 'soledad':
+        return 'Busca apoyo, no estás solo.';
+      case 'contencion':
+        return 'Esta bien pedir ayuda, un abrazo nos viene bien a todos';
+      default:
+        return 'Mantén la calma y sigue adelante.';
+    }
+  }
+
 // Actualizar el calendario cuando el usuario cambia mes o año
 updateCalendar() {
   this.generateCalendar();

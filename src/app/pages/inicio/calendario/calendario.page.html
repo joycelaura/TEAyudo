@@ -53,6 +53,17 @@
       </ion-col>
     </ion-row>
 
+    <!-- Mostrar el consejo basado en la emoción más frecuente -->
+    <ion-card *ngIf="advice" class="advice-card">
+      <ion-card-header>
+        <ion-card-title>Consejo para ti</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ advice }}</p>
+      </ion-card-content>
+    </ion-card>
+
+
     <!-- Sección del gráfico -->
     <ion-row>
       <ion-col size="12">

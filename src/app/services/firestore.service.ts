@@ -181,6 +181,44 @@ async getEmotionsByMonth(email: string, year: number, month: number): Promise<{ 
   return emotionsByDay;
 }
 
+async getMostFrequentEmotionOfMonth(email: string, year: number, month: number): Promise<Emotion | null> {
+  const emotionsByDay = await this.getEmotionsByMonth(email, year, month); // Obtiene las emociones del mes
+  
+  const emotionCount: { [key: string]: number } = {};
+
+  // Contamos la cantidad de veces que aparece cada emoción en todo el mes
+  for (const day in emotionsByDay) {
+    emotionsByDay[day].forEach((emotion) => {
+      if (emotionCount[emotion.name]) {
+        emotionCount[emotion.name]++;
+      } else {
+        emotionCount[emotion.name] = 1;
+      }
+    });
+  }
+
+  // Determinamos cuál es la emoción más frecuente
+  let mostFrequentEmotion: Emotion | null = null;
+  let maxCount = 0;
+
+  for (const emotionName in emotionCount) {
+    if (emotionCount[emotionName] > maxCount) {
+      mostFrequentEmotion = {
+        name: emotionName,
+        count: emotionCount[emotionName],
+        lastUpdated: new Date(),
+        email,
+        year,
+        month,
+        day: 0,
+      };
+      maxCount = emotionCount[emotionName];
+    }
+  }
+
+  return mostFrequentEmotion; // Devuelve la emoción más frecuente
+}
+
 // Función auxiliar para formatear fechas
 private formatDate(date: Date): string {
   const year = date.getFullYear();

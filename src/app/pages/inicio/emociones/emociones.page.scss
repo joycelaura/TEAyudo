@@ -1,4 +1,3 @@
-
 ion-button {
   height: auto; /* Quita la altura fija */
   font-size: 20px;
@@ -30,14 +29,15 @@ ion-content {
 --padding-top: 0;
 --padding-bottom: 0;
 --background: none;
-background-color: var(--ion-background-color); /* Cambia según el tema */
+--background-color: var(--ion-background-color); /* Cambia según el tema */
 }
+
 ion-toolbar {
 --padding-start: 0;
 --padding-end: 0;
 --padding-top: 0;
 --padding-bottom: 0;
 --background: none;
-background-color: var(--ion-background-color); /* Cambia según el tema */
---color: #ffffff;
+--background-color: var(--ion-background-color); /* Cambia según el tema */
+--color: var(--ion-text-color);
 }

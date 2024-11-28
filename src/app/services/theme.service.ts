@@ -12,30 +12,12 @@ export class ThemeService {
     this.loadTheme();
   }
 
-  /*
-  toggleTheme() {
-    this.isDark = !this.isDark;
-    this.applyTheme();
-    this.saveTheme();
-  }*/
 
   setTheme(theme: string) {
     this.currentTheme = theme;
     this.applyTheme();
     this.saveTheme();
   }
-
-  /*
-  applyTheme() {
-    if (this.isDark) {
-      document.body.classList.add('dark-theme');
-      document.body.classList.remove('light-theme');
-    } else {
-      document.body.classList.add('light-theme');
-      document.body.classList.remove('dark-theme');
-    }
-  }
-  */
 
   applyTheme() {
     console.log(`Applying theme: ${this.currentTheme}`);

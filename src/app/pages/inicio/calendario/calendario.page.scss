@@ -1,5 +1,25 @@
+ion-content {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --background: none;
+  background-color: var(--ion-background-color); /* Cambia según el tema */
+  }
+
+ion-toolbar {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --background: none;
+  --background-color: var(--ion-background-color); /* Cambia según el tema */
+  --color: var(--ion-text-color);
+}
+
 /* Container principal del calendario */
 .calendar-container {
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,6 +38,7 @@
   width: 100%;
   padding: 0 10px;
   box-sizing: border-box; /* Incluye padding en el tamaño total */
+  background-color: var(--ion-background-color);
 }
 
 /* Grid del calendario */
@@ -31,7 +52,7 @@
 .day-header {
   text-align: center;
   font-weight: bold;
-  background-color: #f4f4f4; /* Color de fondo para los encabezados de los días */
+  background-color: var(--ion-background-color); /* Color de fondo para los encabezados de los días */
   padding: 5px 0;
 }
 
@@ -43,7 +64,7 @@
   justify-content: center;
   border: 1px solid #ddd;
   padding: 10px;
-  background-color: #f9f9f9;
+  background-color:var(--ion-background-color);
   border-radius: 8px;
   height: 100px;
   text-align: center;
@@ -74,6 +95,17 @@
   margin-top: 20px; /* Espaciado superior */
   padding: 10px; /* Espaciado alrededor */
   box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+}
+
+ion-card-title{
+  color: var(--ion-text-color);
+}
+
+.advice-card {
+  background-color: var(--ion-background-color);  /* Cambia el color de fondo aquí */
+  box-shadow: 0 4px 6px rgba(0, 0, 1.2, 0.5);  /* Puedes agregar una sombra si lo deseas */
+  color: var(--ion-text-color);
+  border: 1px solid #ddd;
 }
 
 .chart-container canvas {
