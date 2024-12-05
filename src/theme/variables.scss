@@ -13,61 +13,70 @@
   --theme-default-button: #3880ff; /*Color de Boton por defecto*/
   --theme-default-button-emociones: #ff9800; /* boton de inicio de arriba*/
   --theme-default-button-calendario: #ffeb3b; /* boton de inicio de abajo */
+  --ion-text-color: #ffffff ;
 
   /*Tema Oscuro*/
-  --theme-dark-background: #000000; /*Color de Fondo*/
+  --theme-dark-background: #3e3e3e; /*Color de Fondo*/
   --theme-dark-button: #2f3542; /*Color de Boton negro*/
   --theme-dark-button-emociones: #a4b0be;  /* boton de inicio de arriba*/
-  --theme-dark-button-calendario: #747d8c; /* boton de inicio de abajo */
+  --theme-dark-button-calendario: #a1a5aa; /* boton de inicio de abajo */
+  --ion-text-color: #9f9a9a ;
   
   /*Tema Claro*/
   --theme-light-background: #ffffff; /*Color de Fondo*/
   --theme-light-button: #3d40413b; /*Color de Boton claro*/
   --theme-light-button-emociones: #78afe7; /* boton de inicio de arriba*/
-  --theme-light-button-calendario: #ffffff; /* boton de inicio de abajo */
+  --theme-light-button-calendario: #d4f8d1; /* boton de inicio de abajo */
+  --ion-text-color: #000000 ;
 
   /*Tema Amarillo*/
   --theme-amarillo-background: #e6cc77;
   --theme-amarillo-button: #f9ca24;
   --theme-amarillo-button-emociones: #fff200;/* boton de inicio de arriba*/
   --theme-amarillo-button-calendario: #efdf33;/* boton de inicio de abajo */
+  --ion-text-color: #000000 ;
 
   /*Tema pastel*/
   --theme-pastel-background: #f1bcce; /*Color de Fondo*/
   --theme-pastel-button: #caecef; /*Color de Boton pastel*/
   --theme-pastel-button-emociones: #c1f0bf; /* boton de inicio de arriba*/
   --theme-pastel-button-calendario: #cfc9ef; /* boton de inicio de abajo */
+  --ion-text-color: #000000 ;
 
   /*Tema rojo*/
   --theme-rojo-background: #a12323; /*Color de Fondo*/
   --theme-rojo-button: #eb2f06; /*Color de Boton claro*/
   --theme-rojo-button-emociones: #e55039; /* boton de inicio de arriba*/
   --theme-rojo-button-calendario: #e84118; /* boton de inicio de abajo */
+  --ion-text-color: #000000 ;
 
   /*Tema azul*/
   --theme-azul-background: #3742fa; /*Color de Fondo*/
   --theme-azul-button: #3742fa; /*Color de Boton claro*/
   --theme-azul-button-emociones: #1e90ff; /* boton de inicio de arriba*/
   --theme-azul-button-calendario: #1e90ff; /* boton de inicio de abajo */
+  --ion-text-color: #000000 ;
 
   /*Tema verde*/
   --theme-verde-background: #009432; /*Color de Fondo*/
   --theme-verde-button: #009432; /*Color de Boton claro*/
   --theme-verde-button-emociones: #A3CB38; /* boton de inicio de arriba*/
   --theme-verde-button-calendario: #A3CB38; /* boton de inicio de abajo */
+  --ion-text-color: #000000 ;
 
   /*Tema morado*/
   --theme-morado-background: #66117b; /*Color de Fondo*/
   --theme-morado-button: #66117b; /*Color de Boton claro*/
   --theme-morado-button-emociones: #8854d0; /* boton de inicio de arriba*/
   --theme-morado-button-calendario: #8854d0; /* boton de inicio de abajo */
+  --ion-text-color: #000000 ;
 
   /*Tema rosa*/
   --theme-rosa-background: #f78fb3; /*Color de Fondo*/
   --theme-rosa-button: #f8a5c2; /*Color de Boton claro*/
   --theme-rosa-button-emociones: #ffb8b8; /* boton de inicio de arriba*/
   --theme-rosa-button-calendario: #ffb8b8; /* boton de inicio de abajo */
-
+  --ion-text-color: #000000 ;
   
 }
 
@@ -76,6 +85,7 @@ body.default-theme {
   --button: var(--theme-default-button);
   --button-emociones: var(--theme-default-button-emociones);
   --button-calendario: var(--theme-default-button-calendario);
+  --ion-text-color: #000000 ;
 }
 
 body.dark-theme {
@@ -83,6 +93,7 @@ body.dark-theme {
   --button: var(--theme-dark-button);
   --button-emociones: var(--theme-dark-button-emociones);
   --button-calendario: var(--theme-dark-button-calendario);
+  --ion-text-color: #7d7d7d ;
 }
 
 body.light-theme {
@@ -90,6 +101,7 @@ body.light-theme {
   --button: var(--theme-light-button);
   --button-emociones: var(--theme-light-button-emociones);
   --button-calendario: var(--theme-light-button-calendario);
+  --ion-text-color: #000000 ;
 }
 
 body.amarillo-theme {
@@ -97,6 +109,7 @@ body.amarillo-theme {
   --button: var(--theme-amarillo-button);
   --button-emociones: var(--theme-amarillo-button-emociones);
   --button-calendario: var(--theme-amarillo-button-calendario);
+  --ion-text-color: #000000 ;
 }
 
 body.pastel-theme {
@@ -104,6 +117,7 @@ body.pastel-theme {
   --button: var(--theme-pastel-button);
   --button-emociones: var(--theme-pastel-button-emociones);
   --button-calendario: var(--theme-pastel-button-calendario);
+  --ion-text-color: #000000 ;
 }
 
 body.rojo-theme {
@@ -111,6 +125,7 @@ body.rojo-theme {
   --button: var(--theme-rojo-button);
   --button-emociones: var(--theme-rojo-button-emociones);
   --button-calendario: var(--theme-rojo-button-calendario);
+  --ion-text-color: #000000 ;
 }
 
 body.azul-theme {
@@ -118,6 +133,7 @@ body.azul-theme {
   --button: var(--theme-azul-button);
   --button-emociones: var(--theme-azul-button-emociones);
   --button-calendario: var(--theme-azul-button-calendario);
+  --ion-text-color: #000000 ;
 }
 
 body.verde-theme {
@@ -125,6 +141,7 @@ body.verde-theme {
   --button: var(--theme-verde-button);
   --button-emociones: var(--theme-verde-button-emociones);
   --button-calendario: var(--theme-verde-button-calendario);
+  --ion-text-color: #000000 ;
 }
 
 body.morado-theme {
@@ -132,6 +149,7 @@ body.morado-theme {
   --button: var(--theme-morado-button);
   --button-emociones: var(--theme-morado-button-emociones);
   --button-calendario: var(--theme-morado-button-calendario);
+  --ion-text-color: #000000 ;
 }
 
 body.rosa-theme {
@@ -139,27 +157,11 @@ body.rosa-theme {
   --button: var(--theme-rosa-button);
   --button-emociones: var(--theme-rosa-button-emociones);
   --button-calendario: var(--theme-rosa-button-calendario);
+  --ion-text-color: #000000 ;
 }
 
 
-// .light-theme {
-//   --ion-background-color: #ffffff;
-//   --ion-color-primary: #3880ff;
-//   --ion-color-secondary: #3dc2ff;
-//   --ion-tab-bar-background-color: #f4f4f4;
-// }
-
-// .dark-theme {
-//   --ion-background-color: #4679de;
-//   --ion-color-primary: #f4f4f4;
-//   --ion-color-secondary: #3dc2ff;
-//   --ion-tab-bar-background-color: #111111;
-// }
-
 html {
-  /* 
-   * For more information on dynamic font scaling, visit the documentation:
-   * https://ionicframework.com/docs/layout/dynamic-font-scaling
-   */
+  
   --ion-dynamic-font: var(--ion-default-dynamic-font);
 }
