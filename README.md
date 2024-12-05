@@ -46,7 +46,7 @@ Asegúrate de que el directorio src/assets contenga todos los archivos necesario
 
 Si encuentras que falta algún archivo, verifica que se haya clonado correctamente desde el repositorio o añádelo manualmente.
 
-## Ejecusion del Proyecto
+## Ejecucion del Proyecto
 Para ejecutar el proyecto en tu entorno local, sigue estos pasos:
 
 1.Iniciar el servidor de desarrollo: 
