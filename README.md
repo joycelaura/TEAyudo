@@ -21,14 +21,14 @@ Sigue estos pasos para clonar el proyecto desde GitHub:
 
    ```bash
    git clone https://github.com/tu-usuario/teayudo.git
-
+ ```
 3. Navega a la carpeta del proyecto:
 
 En la terminal abre bash y escribe lo siguiente:
 
 ```bash
 cd teayudo
-
+ ```
 ## Instalacion de Dependencias
 1. Instalar Node.js y npm: Si no tienes Node.js y npm instalados, descarga e instala la versión recomendada desde aquí: https://nodejs.org/en.
 
@@ -36,12 +36,12 @@ cd teayudo
 
    ```bash   
    npm install -g @ionic/cli
-   
+    ```
 4. Instalar las dependencias del proyecto: En la raíz del proyecto, ejecuta el siguiente comando para instalar todas las dependencias necesarias (como Angular, Firebase, y otras librerías):
 
    ```bash
    npm install
-
+ ```
 ## Verificacion de los assets
 Es importante asegurarte de que todos los archivos de recursos (assets) necesarios estén correctamente instalados y accesibles. Esto incluye los íconos, sonidos y otras imágenes usadas en la aplicación.
 
@@ -57,7 +57,7 @@ Ejecuta el siguiente comando para iniciar el servidor de desarrollo de Ionic:
 
 ```bash
 ionic serve
-
+ ```
 2.Abrir en el navegador: 
 Una vez que el servidor esté corriendo, abre tu navegador y visita http://localhost:8100 para ver la aplicación en acción.
   
