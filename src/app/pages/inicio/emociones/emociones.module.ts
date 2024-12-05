@@ -8,12 +8,14 @@ import { EmocionesPageRoutingModule } from './emociones-routing.module';
 
 import { EmocionesPage } from './emociones.page';
 
+import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EmocionesPageRoutingModule
+    EmocionesPageRoutingModule,
+    SharedModule
   ],
   declarations: [EmocionesPage]
 })

@@ -32,22 +32,50 @@
       </ion-col>
     </ion-row>
 
-    <!-- Mostrar los días de la semana (Lunes a Domingo) -->
-    <ion-row class="weekdays">
-      <ion-col size="1" *ngFor="let day of weekDays" class="weekday">
-        <div class="day-header">{{ day }}</div>
+
+    <!-- Mostrar los días de la semana -->
+    <ion-row>
+      <ion-col *ngFor="let day of weekDays" size="1.7">
+        <div class="day-header">
+          <span>{{ day }}</span>
+        </div>
       </ion-col>
     </ion-row>
 
-    <!-- Mostrar los días del mes distribuidos por semana -->
-    <ion-row *ngFor="let week of calendarDays" class="calendar-week">
-      <ion-col *ngFor="let day of week" class="calendar-day">
-        <!-- Verifica si day no es null antes de mostrar -->
-        <div class="day-box" *ngIf="day">
-          <span class="day-number">{{ day.date }}</span>
-          <img *ngIf="day.emotionIcon" [src]="day.emotionIcon" alt="Dominant Emotion" class="imagen">
+    <!-- Mostrar los días del mes organizados por semanas -->
+    <ion-row *ngFor="let week of calendarDays">
+      <ion-col *ngFor="let day of week" size="1.7">
+        <div *ngIf="day" class="day-box">
+          <span>{{ day }}</span>
+          <img *ngIf="getDominantEmotionIcon(day)" [src]="getDominantEmotionIcon(day)" alt="Dominant Emotion" class="imagen">
+
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- Mostrar el consejo basado en la emoción más frecuente -->
+    <ion-card *ngIf="advice" class="advice-card">
+      <ion-card-header>
+        <ion-card-title>Consejo para ti</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ advice }}</p>
+      </ion-card-content>
+    </ion-card>
+
+
+    <!-- Sección del gráfico -->
+    <ion-row>
+      <ion-col size="12">
+        <h3>Estadísticas de Emociones</h3>
+        <div class="chart-container">
+          <canvas #emotionChart></canvas>
+        </div>
+        <div *ngIf="chartData.labels.length === 0" class="no-data">
+          <p>No hay suficientes datos para mostrar el gráfico.</p>
         </div>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
+<app-tabs style="z-index: 1"></app-tabs>

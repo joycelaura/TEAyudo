@@ -12,9 +12,10 @@ import { AudioService } from 'src/app/services/audio.service';
   styleUrls: ['./emociones.page.scss'],
 })
 export class EmocionesPage implements OnInit {
-
-  emotions: Emotion[] = [];    // lista de emociones
+  emotions: Emotion[] = []; // lista de emociones
   userEmail: string | null = null;
+
+  // Define los archivos de sonido para cada emoción
 
   private audioIra = new Audio('assets/sounds/ira.mp3');
   private audioAlegria = new Audio('assets/sounds/alegria.mp3');
@@ -25,7 +26,14 @@ export class EmocionesPage implements OnInit {
   private audioContencion = new Audio('assets/sounds/contencion.mp3');
   private audioSoledad = new Audio('assets/sounds/soledad.mp3');
 
-  constructor(private firestoreSvc: FirestoreService, private auth: AngularFireAuth, private themeService: ThemeService, private audioService: AudioService) { }
+
+  constructor(
+    private firestoreSvc: FirestoreService, 
+    private auth: AngularFireAuth, 
+    private themeService: ThemeService, 
+    private audioService: AudioService
+  ) { }
+
 
   async ngOnInit() {
     this.applyStoredTheme();
@@ -40,11 +48,13 @@ export class EmocionesPage implements OnInit {
       console.log("No user is logged in.");
     }
   }
+  
   async applyStoredTheme() {
     const currentTheme = this.themeService.getCurrentTheme();
     document.body.classList.add(currentTheme);
   }
 
+  // Contador de emociones y reproducción de sonido
   onEmotionClick(emotion: string) {
     const email = localStorage.getItem('userEmail');
     if (email) {
@@ -99,10 +109,18 @@ export class EmocionesPage implements OnInit {
     const day = date.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
   }
-async loadEmotionCounts() {
+
+  // Contador de emociones, registro en Firebase
+  async loadEmotionCounts() {
     if (this.userEmail) {
       this.emotions = await this.firestoreSvc.getEmotionCount(this.userEmail);
       console.log("Emotions loaded:", this.emotions);
     }
   }
+
+  // Función para reproducir un sonido de clic genérico
+  playClickSound() {
+    this.audioService.playSound('click');
+  }
 }
+ 

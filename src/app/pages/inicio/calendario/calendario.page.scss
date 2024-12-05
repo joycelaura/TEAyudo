@@ -1,8 +1,33 @@
+ion-content {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --background: none;
+  background-color: var(--ion-background-color); /* Cambia según el tema */
+  }
+
+ion-toolbar {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --background: none;
+  --background-color: var(--ion-background-color); /* Cambia según el tema */
+  --color: var(--ion-text-color);
+}
+
 /* Container principal del calendario */
 .calendar-container {
+
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%; /* Asegura que el contenedor ocupe el ancho completo */
+  max-width: 100%; /* Evita desbordamientos */
+  padding: 0;
+  margin: 0 auto; /* Centra el contenedor */
+  box-sizing: border-box; /* Asegura que padding y border no alteren el tamaño */
 }
 
 /* Estilos del encabezado del calendario */
@@ -12,91 +37,124 @@
   justify-content: space-between;
   width: 100%;
   padding: 0 10px;
+  box-sizing: border-box; /* Incluye padding en el tamaño total */
+  background-color: var(--ion-background-color);
 }
 
-/* Estilo de la cuadrícula del calendario */
+/* Grid del calendario */
 .calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);  /* 7 columnas (una por cada día de la semana) */
-  gap: 5px;  /* Reducir el espacio entre las celdas */
-  justify-content: center;  /* Centra la cuadrícula */
-  width: 100%;  /* Ajuste para ocupar todo el ancho */
-  margin-top: 10px;
-  position: relative;  /* Para poder controlar la relación de aspecto */
-}
-
-
-/* Estilo de las filas (semanas) */
-.calendar-week {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-/* Estilos de las celdas del calendario */
+/* Encabezados de los días */
+.day-header {
+  text-align: center;
+  font-weight: bold;
+  background-color: var(--ion-background-color); /* Color de fondo para los encabezados de los días */
+  padding: 5px 0;
+}
+
+/* Cajas de días */
 .day-box {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;  /* Ajusta el contenido al inicio (arriba) */
-  background-color: #f9f9f9;
+  justify-content: center;
+  border: 1px solid #ddd;
   padding: 10px;
+  background-color:var(--ion-background-color);
   border-radius: 8px;
-  border: 1px solid #ddd;  /* Línea entre las celdas */
-  box-sizing: border-box;  /* Asegura que el padding no aumente el tamaño */
-  position: relative;  /* Necesario para la relación de aspecto */
-  width: 100%;  /* Asegura que ocupe todo el ancho disponible */
-  height: 0;  /* Esto lo mantiene cuadrado */
-  padding-top: 100%;  /* Esto crea una relación de aspecto 1:1 */
+  height: 100px;
+  text-align: center;
+  box-sizing: border-box; /* Evita desbordamientos */
 }
-/* Número del día */
-.day-number {
+
+.day-box span {
   font-size: 1.2em;
   font-weight: bold;
-  position: absolute;  /* Posicionamiento absoluto dentro del contenedor */
-  top: 20px;  /* Mueve el número hacia la parte superior */
-  left: 50%;
-  transform: translateX(-50%);
 }
 
-/* Estilo de la imagen de emoción */
-.imagen {
-  position: absolute;  /* Posicionamiento absoluto dentro del contenedor */
-  bottom: 10px;  /* Mueve la imagen hacia la parte inferior */
-  left: 50%;
-  transform: translateX(-50%);  /* Centra la imagen horizontalmente */
-  height: 5vw; /* Ajusta el tamaño basado en el ancho de la ventana */
-  width: auto;  /* Mantiene la proporción original */
+.day-box img {
+  margin-top: 5px;
+  width: 30px;
+  height: auto;
 }
 
-/* Estilo de los días de la semana */
-.weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  margin-bottom: 10px;
-  justify-items: center;  /* Centra los encabezados de los días de la semana */
+.day-header span {
+  font-size: 1em;
 }
 
-/* Estilos de los nombres de los días de la semana */
-.weekday {
-  text-align: center;
+/* Estilo para el gráfico */
+.chart-container {
+  width: 100%; /* Asegura que el contenedor use el 100% del espacio disponible */
+  max-width: 800px; /* Limita el tamaño máximo del gráfico */
+  height: 400px; /* Altura fija para el gráfico */
+  position: relative; /* Permite que el canvas se ajuste dentro del contenedor */
+  margin-top: 20px; /* Espaciado superior */
+  padding: 10px; /* Espaciado alrededor */
+  box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+}
+
+ion-card-title{
+  color: var(--ion-text-color);
+}
+
+.advice-card {
+  background-color: var(--ion-background-color);  /* Cambia el color de fondo aquí */
+  box-shadow: 0 4px 6px rgba(0, 0, 1.2, 0.5);  /* Puedes agregar una sombra si lo deseas */
+  color: var(--ion-text-color);
+  border: 1px solid #ddd;
+}
+
+.chart-container canvas {
+  width: 100% !important; /* Asegura que el canvas ocupe todo el ancho disponible */
+  height: 100% !important; /* Asegura que el canvas ocupe toda la altura disponible */
+  display: block; /* Evita problemas con el canvas */
+}
+
+/* Título del gráfico */
+.chart-container h3 {
+  font-size: 1.5em;
   font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
-/* Estilo del calendario en pantallas pequeñas */
+/* Responsivo: Cambiar número de columnas dependiendo del tamaño de la pantalla */
+@media (max-width: 1024px) {
+  .calendar-grid {
+    grid-template-columns: repeat(5, 1fr); /* 5 columnas para pantallas más pequeñas */
+  }
+  .day-box {
+    height: 80px; /* Reducir la altura de los días */
+  }
+  .day-box span {
+    font-size: 1em; /* Reducir el tamaño de la fuente */
+  }
+}
+
 @media (max-width: 768px) {
   .calendar-grid {
-    grid-template-columns: repeat(7, 1fr);  /* 7 columnas */
-    /*gap: 5px;   Reducir el espacio entre las celdas */
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas en pantallas pequeñas */
   }
-
   .day-box {
-    padding: 5px;
-    height: 80px; /* Ajuste para pantallas pequeñas */
-    padding-top: 80%;
+    height: 70px; /* Ajustar la altura de los días */
   }
+  .day-box span {
+    font-size: 0.9em; /* Reducir tamaño de fuente */
+  }
+}
 
-  .day-number {
-    font-size: 1em;
+@media (max-width: 480px) {
+  .calendar-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas para móviles */
+  }
+  .day-box {
+    height: 60px; /* Ajustar la altura de los días */
+  }
+  .day-box span {
+    font-size: 0.8em; /* Reducir aún más el tamaño de la fuente */
   }
 }
