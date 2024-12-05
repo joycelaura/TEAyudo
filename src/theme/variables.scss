@@ -13,14 +13,14 @@
   --theme-default-button: #3880ff; /*Color de Boton por defecto*/
   --theme-default-button-emociones: #ff9800; /* boton de inicio de arriba*/
   --theme-default-button-calendario: #ffeb3b; /* boton de inicio de abajo */
-  --ion-text-color: #000000 ;
+  --ion-text-color: #ffffff ;
 
   /*Tema Oscuro*/
   --theme-dark-background: #3e3e3e; /*Color de Fondo*/
   --theme-dark-button: #2f3542; /*Color de Boton negro*/
   --theme-dark-button-emociones: #a4b0be;  /* boton de inicio de arriba*/
-  --theme-dark-button-calendario: #747d8c; /* boton de inicio de abajo */
-  --ion-text-color: #ffffff ;
+  --theme-dark-button-calendario: #a1a5aa; /* boton de inicio de abajo */
+  --ion-text-color: #9f9a9a ;
   
   /*Tema Claro*/
   --theme-light-background: #ffffff; /*Color de Fondo*/
@@ -93,7 +93,7 @@ body.dark-theme {
   --button: var(--theme-dark-button);
   --button-emociones: var(--theme-dark-button-emociones);
   --button-calendario: var(--theme-dark-button-calendario);
-  --ion-text-color: #ffffff ;
+  --ion-text-color: #7d7d7d ;
 }
 
 body.light-theme {

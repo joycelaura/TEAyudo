@@ -46,53 +46,62 @@ describe('EmocionesPage', () => {
     expect(titleElement.textContent).toContain('Emociones');
   });
 
-  it('should call onEmotionClick with "anger" when the anger button is clicked', () => {
+  it('should call onEmotionClick with "ira" when the "Ira" button is clicked', () => {
     spyOn(component, 'onEmotionClick');
-    const angerButton = fixture.debugElement.query(By.css('ion-button[expand="block"]:nth-child(1)'));
-    angerButton.triggerEventHandler('click', null);
-    expect(component.onEmotionClick).toHaveBeenCalledWith('anger');
+    const iraButton = fixture.debugElement.query(By.css('.ira-button'));
+    iraButton.triggerEventHandler('click', null);
+    expect(component.onEmotionClick).toHaveBeenCalledWith('ira');
   });
+  
+  it('should call onEmotionClick with "alegria" when the "Alegría" button is clicked', () => {
+    spyOn(component, 'onEmotionClick');
+    const alegriaButton = fixture.debugElement.query(By.css('.alegria-button'));
+    alegriaButton.triggerEventHandler('click', null);
+    expect(component.onEmotionClick).toHaveBeenCalledWith('alegria');
+  });
+  
+  it('should call onEmotionClick with "tristeza" when the "Tristeza" button is clicked', () => {
+    spyOn(component, 'onEmotionClick');
+    const tristezaButton = fixture.debugElement.query(By.css('.tristeza-button'));
+    tristezaButton.triggerEventHandler('click', null);
+    expect(component.onEmotionClick).toHaveBeenCalledWith('tristeza');
+  });
+  
+  it('should call onEmotionClick with "miedo" when the "Miedo" button is clicked', () => {
+    spyOn(component, 'onEmotionClick');
+    const miedoButton = fixture.debugElement.query(By.css('.miedo-button'));
+    miedoButton.triggerEventHandler('click', null);
+    expect(component.onEmotionClick).toHaveBeenCalledWith('miedo');
+  });
+  
+  it('should call onEmotionClick with "agrado" when the "Agrado" button is clicked', () => {
+    spyOn(component, 'onEmotionClick');
+    const agradoButton = fixture.debugElement.query(By.css('.agrado-button'));
+    agradoButton.triggerEventHandler('click', null);
+    expect(component.onEmotionClick).toHaveBeenCalledWith('agrado');
+  });
+  
+  it('should call onEmotionClick with "verguenza" when the "Vergüenza" button is clicked', () => {
+    spyOn(component, 'onEmotionClick');
+    const verguenzaButton = fixture.debugElement.query(By.css('.verguenza-button'));
+    verguenzaButton.triggerEventHandler('click', null);
+    expect(component.onEmotionClick).toHaveBeenCalledWith('verguenza');
+  });
+  
+  it('should call onEmotionClick with "contencion" when the "Necesito Contención" button is clicked', () => {
+    spyOn(component, 'onEmotionClick');
+    const contencionButton = fixture.debugElement.query(By.css('.contencion-button'));
+    contencionButton.triggerEventHandler('click', null);
+    expect(component.onEmotionClick).toHaveBeenCalledWith('contencion');
+  });
+  
+  it('should call onEmotionClick with "soledad" when the "Quiero estar solo" button is clicked', () => {
+    spyOn(component, 'onEmotionClick');
+    const soledadButton = fixture.debugElement.query(By.css('.soledad-button'));
+    soledadButton.triggerEventHandler('click', null);
+    expect(component.onEmotionClick).toHaveBeenCalledWith('soledad');
+  });
+  
 
-  it('should call onEmotionClick with "joy" when the joy button is clicked', () => {
-    spyOn(component, 'onEmotionClick');
-    const joyButton = fixture.debugElement.query(By.css('ion-button[expand="block"]:nth-child(2)'));
-    joyButton.triggerEventHandler('click', null);
-    expect(component.onEmotionClick).toHaveBeenCalledWith('joy');
-  });
-
-  it('should call onEmotionClick with "sadness" when the sadness button is clicked', () => {
-    spyOn(component, 'onEmotionClick');
-    const sadButton = fixture.debugElement.query(By.css('ion-button[expand="block"]:nth-child(3)'));
-    sadButton.triggerEventHandler('click', null);
-    expect(component.onEmotionClick).toHaveBeenCalledWith('sadness');
-  });
-
-  it('should call onEmotionClick with "fear" when the fear button is clicked', () => {
-    spyOn(component, 'onEmotionClick');
-    const fearButton = fixture.debugElement.query(By.css('ion-button[expand="block"]:nth-child(4)'));
-    fearButton.triggerEventHandler('click', null);
-    expect(component.onEmotionClick).toHaveBeenCalledWith('fear');
-  });
-
-  it('should call onEmotionClick with "shame" when the shame button is clicked', () => {
-    spyOn(component, 'onEmotionClick');
-    const shameButton = fixture.debugElement.query(By.css('ion-button[expand="block"]:nth-child(5)'));
-    shameButton.triggerEventHandler('click', null);
-    expect(component.onEmotionClick).toHaveBeenCalledWith('shame');
-  });
-
-  it('should call onEmotionClick with "healing" when the healing button is clicked', () => {
-    spyOn(component, 'onEmotionClick');
-    const healingButton = fixture.debugElement.query(By.css('ion-button[expand="block"]:nth-child(6)'));
-    healingButton.triggerEventHandler('click', null);
-    expect(component.onEmotionClick).toHaveBeenCalledWith('healing');
-  });
-
-  it('should call onEmotionClick with "alone" when the alone button is clicked', () => {
-    spyOn(component, 'onEmotionClick');
-    const aloneButton = fixture.debugElement.query(By.css('ion-button[expand="block"]:nth-child(7)'));
-    aloneButton.triggerEventHandler('click', null);
-    expect(component.onEmotionClick).toHaveBeenCalledWith('alone');
-  });
 });
 

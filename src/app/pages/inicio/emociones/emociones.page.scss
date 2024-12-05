@@ -1,3 +1,14 @@
+/* Colores para cada emoción */
+$color-ira: #ff3b30; // Rojo
+$color-alegria: #ffcc00; // Amarillo
+$color-tristeza: #0044cc; // Azul
+$color-miedo: #8e44ad; // Púrpura
+$color-agrado: #27ae60; // Verde
+$color-verguenza: #f39c12; // Naranja
+$color-contencion: #3498db; // Azul claro
+$color-soledad: #95a5a6; // Gris
+
+/* Estilos generales para los botones */
 ion-button {
   height: auto; /* Quita la altura fija */
   font-size: 20px;
@@ -7,6 +18,40 @@ ion-button {
   width: 100%; /* Asegura que los botones ocupen todo el ancho */
 }
 
+/* Estilos para las clases de cada emoción */
+ion-button.ira-button {
+  --background: $color-ira;
+}
+
+ion-button.alegria-button {
+  --background: $color-alegria;
+}
+
+ion-button.tristeza-button {
+  --background: $color-tristeza;
+}
+
+ion-button.miedo-button {
+  --background: $color-miedo;
+}
+
+ion-button.agrado-button {
+  --background: $color-agrado;
+}
+
+ion-button.verguenza-button {
+  --background: $color-verguenza;
+}
+
+ion-button.contencion-button {
+  --background: $color-contencion;
+}
+
+ion-button.soledad-button {
+  --background: $color-soledad;
+}
+
+/* Estilos para la disposición de los botones en la grid */
 .centrar-grid {
   display: flex;
   justify-content: center;
@@ -19,25 +64,27 @@ ion-row {
 }
 
 ion-icon {
-margin-right: 10px;
-font-size: 24px;
+  margin-right: 10px;
+  font-size: 24px;
 }
 
+/* Estilos del contenido */
 ion-content {
---padding-start: 0;
---padding-end: 0;
---padding-top: 0;
---padding-bottom: 0;
---background: none;
---background-color: var(--ion-background-color); /* Cambia según el tema */
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --background: none;
+  --background-color: var(--ion-background-color); /* Cambia según el tema */
 }
 
+/* Estilos del toolbar */
 ion-toolbar {
---padding-start: 0;
---padding-end: 0;
---padding-top: 0;
---padding-bottom: 0;
---background: none;
---background-color: var(--ion-background-color); /* Cambia según el tema */
---color: var(--ion-text-color);
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --background: none;
+  --background-color: var(--ion-background-color); /* Cambia según el tema */
+  --color: var(--ion-text-color);
 }
