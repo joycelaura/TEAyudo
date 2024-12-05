@@ -26,17 +26,20 @@ Sigue estos pasos para clonar el proyecto desde GitHub:
 
 En la terminal abre bash y escribe lo siguiente:
 
+```bash
 cd teayudo
 
 ## Instalacion de Dependencias
 1. Instalar Node.js y npm: Si no tienes Node.js y npm instalados, descarga e instala la versión recomendada desde aquí: https://nodejs.org/en.
 
 2. Instalar Ionic CLI: Si no tienes Ionic instalado globalmente, puedes hacerlo con el siguiente comando:
-   
+
+   ```bash   
    npm install -g @ionic/cli
    
 4. Instalar las dependencias del proyecto: En la raíz del proyecto, ejecuta el siguiente comando para instalar todas las dependencias necesarias (como Angular, Firebase, y otras librerías):
 
+   ```bash
    npm install
 
 ## Verificacion de los assets
@@ -52,6 +55,7 @@ Para ejecutar el proyecto en tu entorno local, sigue estos pasos:
 1.Iniciar el servidor de desarrollo: 
 Ejecuta el siguiente comando para iniciar el servidor de desarrollo de Ionic:
 
+```bash
 ionic serve
 
 2.Abrir en el navegador: 
